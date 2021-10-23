@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @Entity
 public class Assurance {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String nom;
     private LocalDate dateAssurance;
     private LocalDate dateExpiration;
@@ -23,6 +23,14 @@ public class Assurance {
         this.nom = nom;
         this.dateAssurance = dateAssurance;
         this.dateExpiration = dateExpiration;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNom() {
