@@ -1,0 +1,51 @@
+package com.grados.firstfullproject.entities;
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDate;
+
+@Entity
+public class Assurance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String nom;
+    private LocalDate dateAssurance;
+    private LocalDate dateExpiration;
+
+    public Assurance() {
+    }
+
+    public Assurance(String nom, LocalDate dateAssurance, LocalDate dateExpiration) {
+        this.nom = nom;
+        this.dateAssurance = dateAssurance;
+        this.dateExpiration = dateExpiration;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public LocalDate getDateAssurance() {
+        return dateAssurance;
+    }
+
+    public void setDateAssurance(LocalDate dateAssurance) {
+        this.dateAssurance = dateAssurance;
+    }
+
+    public LocalDate getDateExpiration() {
+        return dateExpiration;
+    }
+
+    public void setDateExpiration(LocalDate dateExpiration) {
+        this.dateExpiration = dateExpiration;
+    }
+}
