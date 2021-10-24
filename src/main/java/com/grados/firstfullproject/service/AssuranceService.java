@@ -8,7 +8,7 @@ public interface AssuranceService {
 
     Assurance saveAssurance(Assurance assurance);
     List<Assurance> findAllAssurances();
-    Assurance getAssuranceById(long id);
-    Assurance updateAssurance(Assurance assurance,long id);
-    void deleteAssurance(long id);
+    Assurance getAssuranceById(Long id);
+    Assurance updateAssurance(Assurance assurance,Long id);
+    void deleteAssurance(Long id);
 }

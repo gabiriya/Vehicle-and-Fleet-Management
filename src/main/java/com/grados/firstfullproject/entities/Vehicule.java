@@ -2,11 +2,12 @@ package com.grados.firstfullproject.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 public class Vehicule {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String marque;
@@ -17,7 +18,7 @@ public class Vehicule {
     private LocalDate dateAchat;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.DETACH)
     private Assurance assurance;
 
 
@@ -40,11 +41,11 @@ public class Vehicule {
         this.assurance = assurance;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

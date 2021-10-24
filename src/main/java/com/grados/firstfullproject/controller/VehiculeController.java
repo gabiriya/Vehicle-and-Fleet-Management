@@ -6,10 +6,10 @@ import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.VehiculeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping(("/vehicule"))
@@ -22,6 +22,18 @@ public class VehiculeController {
 
     @PostMapping
     public ResponseEntity<Vehicule> saveVehicule(@RequestBody Vehicule vehicule){
-        return new ResponseEntity<>(vehiculeService.saveVehicule(vehicule), HttpStatus.CREATED);
+        Long id  = vehicule.getAssurance().getId();
+        System.out.println("id = " + id);
+        return new ResponseEntity<>(vehiculeService.saveVehicule(vehicule,id), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteVehicule(@PathVariable("id") Long id){
+        vehiculeService.deleteVehicule(id);
+    }
+
+    @GetMapping("/all")
+    public List<Vehicule> getAllVehicules(){
+        return vehiculeService.findAllVehicules();
     }
 }

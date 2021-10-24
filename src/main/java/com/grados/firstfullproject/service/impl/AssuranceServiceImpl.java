@@ -13,6 +13,10 @@ public class AssuranceServiceImpl implements AssuranceService {
 
     private AssuranceRepository assuranceRepository;
 
+    public AssuranceServiceImpl(AssuranceRepository assuranceRepository) {
+        this.assuranceRepository = assuranceRepository;
+    }
+
     @Override
     public Assurance saveAssurance(Assurance assurance) {
         return assuranceRepository.save(assurance);
@@ -24,7 +28,7 @@ public class AssuranceServiceImpl implements AssuranceService {
     }
 
     @Override
-    public Assurance getAssuranceById(long id) {
+    public Assurance getAssuranceById(Long id) {
         Assurance assurance = assuranceRepository.findById(id).orElseThrow(
                 ()-> new AssuranceNotFound("ID",id)
         );
@@ -32,7 +36,7 @@ public class AssuranceServiceImpl implements AssuranceService {
     }
 
     @Override
-    public Assurance updateAssurance(Assurance assurance, long id) {
+    public Assurance updateAssurance(Assurance assurance, Long id) {
         Assurance updatedAssurance =  assuranceRepository.findById(id).orElseThrow(
                 ()-> new AssuranceNotFound("ID",id)
         );
@@ -45,7 +49,7 @@ public class AssuranceServiceImpl implements AssuranceService {
     }
 
     @Override
-    public void deleteAssurance(long id) {
+    public void deleteAssurance(Long id) {
         assuranceRepository.findById(id).orElseThrow(
                 ()-> new AssuranceNotFound("ID",id)
         );

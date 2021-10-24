@@ -8,7 +8,7 @@ public interface ConducteurService {
 
     Conducteur saveConducteur(Conducteur c);
     List<Conducteur> findAllConducteurs();
-    Conducteur getConducteurById(long id);
-    Conducteur updateConducteur(Conducteur c,long id);
-    void deleteConducteur(long id);
+    Conducteur getConducteurById(Long id);
+    Conducteur updateConducteur(Conducteur c,Long id);
+    void deleteConducteur(Long id);
 }

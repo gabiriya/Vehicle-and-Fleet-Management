@@ -28,14 +28,14 @@ public class ConducteurServiceImpl implements ConducteurService {
     }
 
     @Override
-    public Conducteur getConducteurById(long id) {
+    public Conducteur getConducteurById(Long id) {
         Conducteur conducteur = conducteurRepository.findById(id).orElseThrow(()->
                 new NotFound("Conducteur","Id",id));
         return conducteur;
     }
 
     @Override
-    public Conducteur updateConducteur(Conducteur c, long id) {
+    public Conducteur updateConducteur(Conducteur c, Long id) {
         Conducteur updatedConducteur  = conducteurRepository.findById(id).orElseThrow(
                 ()-> new NotFound("Conducteur","Id",id));
 
@@ -47,7 +47,7 @@ public class ConducteurServiceImpl implements ConducteurService {
     }
 
     @Override
-    public void deleteConducteur(long id) {
+    public void deleteConducteur(Long id) {
         conducteurRepository.findById(id).orElseThrow(
                 ()-> new NotFound("Conducteur","Id",id));
         conducteurRepository.deleteById(id);
