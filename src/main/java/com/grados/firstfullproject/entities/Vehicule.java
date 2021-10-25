@@ -30,6 +30,13 @@ public class Vehicule {
         this.assurance = assurance;
     }
 
+
+    // Mapping Vehicule with conducteur
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,
+            CascadeType.DETACH,CascadeType.REFRESH})
+    @JoinColumn(name = "conducteur")
+    private Conducteur conducteur;
+
     public Vehicule() {
     }
 

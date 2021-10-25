@@ -1,10 +1,8 @@
 package com.grados.firstfullproject.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Conducteur {
@@ -14,6 +12,23 @@ public class Conducteur {
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
+
+
+    // mapping conducteur with vehicule;
+    @OneToMany(mappedBy = "conducteur",
+    cascade = {CascadeType.PERSIST,CascadeType.MERGE,
+                CascadeType.DETACH,CascadeType.REFRESH})
+    private List<Vehicule> vehicules;
+
+    public List<Vehicule> getVehicules() {
+        return vehicules;
+    }
+
+    public void setVehicules(List<Vehicule> vehicules) {
+        this.vehicules = vehicules;
+    }
+
+
 
     public Conducteur() {
     }

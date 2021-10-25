@@ -4,6 +4,7 @@ import com.grados.firstfullproject.entities.Assurance;
 import com.grados.firstfullproject.entities.Vehicule;
 import com.grados.firstfullproject.exception.NotFound;
 import com.grados.firstfullproject.repository.AssuranceRepository;
+import com.grados.firstfullproject.repository.ConducteurRepository;
 import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.VehiculeService;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class VehiculeServiceImpl implements VehiculeService {
 
     private AssuranceRepository assuranceRepository;
 
+    private ConducteurRepository conducteurRepository;
 
 
     public VehiculeServiceImpl(VehiculeRepository vehiculeRepository, AssuranceRepository assuranceRepository) {

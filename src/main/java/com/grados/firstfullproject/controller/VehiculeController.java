@@ -28,12 +28,27 @@ public class VehiculeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteVehicule(@PathVariable("id") Long id){
+    public ResponseEntity<String > deleteVehicule(@PathVariable("id") Long id){
         vehiculeService.deleteVehicule(id);
+        return new ResponseEntity<>("Vehicule deleted",HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public List<Vehicule> getAllVehicules(){
         return vehiculeService.findAllVehicules();
+    }
+
+    // get by id
+
+    @GetMapping("{id}")
+    public ResponseEntity<Vehicule> getVehiculeById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(vehiculeService.getVehiculeById(id),HttpStatus.OK);
+    }
+
+    // update
+    @PutMapping("{id}")
+    public ResponseEntity<Vehicule> updateVehicule(@PathVariable("id") Long id, @RequestBody Vehicule vehicule)
+    {
+        return new ResponseEntity<>(vehiculeService.updateVehicule(vehicule,id),HttpStatus.OK);
     }
 }
