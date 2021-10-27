@@ -22,9 +22,9 @@ public class VehiculeController {
 
     @PostMapping
     public ResponseEntity<Vehicule> saveVehicule(@RequestBody Vehicule vehicule){
-        Long id  = vehicule.getAssurance().getId();
-        System.out.println("id = " + id);
-        return new ResponseEntity<>(vehiculeService.saveVehicule(vehicule,id), HttpStatus.CREATED);
+        Long idAssurance  = vehicule.getAssurance().getId();
+        Long idConducteur = vehicule.getConducteur().getId();
+        return new ResponseEntity<>(vehiculeService.saveVehicule(vehicule,idAssurance,idConducteur), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

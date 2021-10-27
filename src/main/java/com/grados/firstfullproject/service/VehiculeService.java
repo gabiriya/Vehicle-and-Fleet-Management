@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VehiculeService {
 
-    Vehicule saveVehicule(Vehicule v,Long id);
+    Vehicule saveVehicule(Vehicule v,Long idAssurance,Long idConducteur);
     List<Vehicule> findAllVehicules();
     Vehicule getVehiculeById(Long id);
     Vehicule updateVehicule(Vehicule v,Long id);

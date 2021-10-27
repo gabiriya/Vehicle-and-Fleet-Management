@@ -32,13 +32,21 @@ public class Vehicule {
 
 
     // Mapping Vehicule with conducteur
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,
-            CascadeType.DETACH,CascadeType.REFRESH})
-    @JoinColumn(name = "conducteur")
-    private Conducteur conducteur;
-
-    public Vehicule() {
-    }
+//    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,
+//            CascadeType.DETACH,CascadeType.REFRESH})
+//    @JoinColumn(name = "conducteur_id")
+//    private Conducteur conducteur;
+//
+//    public Conducteur getConducteur() {
+//        return conducteur;
+//    }
+//
+//    public void setConducteur(Conducteur conducteur) {
+//        this.conducteur = conducteur;
+//    }
+//
+//    public Vehicule() {
+//    }
 
     public Vehicule(String marque, LocalDate model, int puissance, LocalDate dateAchat,Assurance assurance) {
         this.marque = marque;
