@@ -4,6 +4,7 @@ package com.grados.firstfullproject.controller;
 import com.grados.firstfullproject.entities.Vehicule;
 import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.VehiculeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping(("/vehicule"))
 public class VehiculeController {
+
     private VehiculeService vehiculeService;
 
+    @Autowired
     public VehiculeController(VehiculeService vehiculeService) {
         this.vehiculeService = vehiculeService;
     }

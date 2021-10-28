@@ -4,15 +4,18 @@ import com.grados.firstfullproject.entities.Conducteur;
 import com.grados.firstfullproject.exception.NotFound;
 import com.grados.firstfullproject.repository.ConducteurRepository;
 import com.grados.firstfullproject.service.ConducteurService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
 @Service
 public class ConducteurServiceImpl implements ConducteurService {
 
-    private ConducteurRepository conducteurRepository;
 
+    private ConducteurRepository conducteurRepository;
+    @Autowired
     public ConducteurServiceImpl(ConducteurRepository conducteurRepository) {
         this.conducteurRepository = conducteurRepository;
     }

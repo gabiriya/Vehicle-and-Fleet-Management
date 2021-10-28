@@ -2,7 +2,6 @@ package com.grados.firstfullproject.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Entity
 public class Vehicule {
@@ -32,28 +31,27 @@ public class Vehicule {
 
 
     // Mapping Vehicule with conducteur
-//    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,
-//            CascadeType.DETACH,CascadeType.REFRESH})
-//    @JoinColumn(name = "conducteur_id")
-//    private Conducteur conducteur;
-//
-//    public Conducteur getConducteur() {
-//        return conducteur;
-//    }
-//
-//    public void setConducteur(Conducteur conducteur) {
-//        this.conducteur = conducteur;
-//    }
-//
-//    public Vehicule() {
-//    }
+    @ManyToOne
+    @JoinColumn(name = "fk_condcut")
+    private Conducteur conducteur;
 
-    public Vehicule(String marque, LocalDate model, int puissance, LocalDate dateAchat,Assurance assurance) {
+    public Conducteur getConducteur() {
+        return conducteur;
+    }
+
+    public void setConducteur(Conducteur conducteur) {
+        this.conducteur = conducteur;
+    }
+
+    public Vehicule() {
+    }
+
+    public Vehicule(String marque, LocalDate model, int puissance, LocalDate dateAchat) {
         this.marque = marque;
         this.model = model;
         this.puissance = puissance;
         this.dateAchat = dateAchat;
-        this.assurance = assurance;
+
     }
 
     public Long getId() {

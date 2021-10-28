@@ -15,8 +15,7 @@ public class Conducteur {
 
 
     // mapping conducteur with vehicule;
-    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,
-                CascadeType.DETACH,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "conducteur",cascade = {CascadeType.ALL})
     private List<Vehicule> vehicules;
 
     public List<Vehicule> getVehicules() {

@@ -1,7 +1,6 @@
 package com.grados.firstfullproject.controller;
 
 import com.grados.firstfullproject.entities.Assurance;
-import com.grados.firstfullproject.repository.AssuranceRepository;
 import com.grados.firstfullproject.service.AssuranceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
