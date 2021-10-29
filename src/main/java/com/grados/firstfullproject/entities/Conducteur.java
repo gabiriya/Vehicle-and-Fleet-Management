@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class Conducteur {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
     private String prenom;
@@ -15,16 +15,16 @@ public class Conducteur {
 
 
     // mapping conducteur with vehicule;
-    @OneToMany(mappedBy = "conducteur",cascade = {CascadeType.ALL})
-    private List<Vehicule> vehicules;
-
-    public List<Vehicule> getVehicules() {
-        return vehicules;
-    }
-
-    public void setVehicules(List<Vehicule> vehicules) {
-        this.vehicules = vehicules;
-    }
+//    @OneToMany(mappedBy = "conducteur",cascade = {CascadeType.REFRESH})
+//    private List<Vehicule> vehicules;
+//
+//    public List<Vehicule> getVehicules() {
+//        return vehicules;
+//    }
+//
+//    public void setVehicules(List<Vehicule> vehicules) {
+//        this.vehicules = vehicules;
+//    }
 
 
 

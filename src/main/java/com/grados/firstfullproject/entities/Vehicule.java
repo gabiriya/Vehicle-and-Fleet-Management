@@ -32,7 +32,6 @@ public class Vehicule {
 
     // Mapping Vehicule with conducteur
     @ManyToOne
-    @JoinColumn(name = "fk_condcut")
     private Conducteur conducteur;
 
     public Conducteur getConducteur() {

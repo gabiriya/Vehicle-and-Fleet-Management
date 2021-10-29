@@ -8,6 +8,7 @@ import com.grados.firstfullproject.repository.AssuranceRepository;
 import com.grados.firstfullproject.repository.ConducteurRepository;
 import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.VehiculeService;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -82,4 +83,5 @@ public class VehiculeServiceImpl implements VehiculeService {
         vehiculeRepository.findById(id).orElseThrow(()->new NotFound("Vehicule","ID",id));
         vehiculeRepository.deleteById(id);
     }
+
 }

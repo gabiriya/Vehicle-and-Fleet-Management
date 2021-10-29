@@ -1,9 +1,11 @@
 package com.grados.firstfullproject.controller;
 
 import com.grados.firstfullproject.entities.Conducteur;
+import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.ConducteurService;
 import com.grados.firstfullproject.service.VehiculeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +19,23 @@ public class ConducteurController {
 
     private VehiculeService vehiculeService;
 
+    private VehiculeRepository vehiculeRepository;
+
+
+    public ConducteurController() {
+
+    }
 
     private ConducteurService conducteurService;
 
     @Autowired
-    public ConducteurController(ConducteurService conducteurService,VehiculeService vehiculeService) {
+    public ConducteurController(
+            ConducteurService conducteurService,
+            VehiculeService vehiculeService,
+            VehiculeRepository vehiculeRepository) {
         this.conducteurService = conducteurService;
         this.vehiculeService = vehiculeService;
+        this.vehiculeRepository = vehiculeRepository;
     }
 
     @PostMapping
@@ -48,7 +60,10 @@ public class ConducteurController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String > deleteConducteur(@PathVariable("id") Long id){
+        vehiculeRepository.deleteAllVehiculeWithConduct(id);
+
         conducteurService.deleteConducteur(id);
-        return new ResponseEntity<>("Conducteur a ete supprimer avec success",HttpStatus.OK);
+
+        return new ResponseEntity<>("Conducteur a ete supprimer avec success , ID = " + id,HttpStatus.OK);
     }
 }

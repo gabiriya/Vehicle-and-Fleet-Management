@@ -19,7 +19,7 @@ public class AssuranceController {
     }
 
     // add assurance to db
-    @RequestMapping
+    @PostMapping
     public ResponseEntity<Assurance> addAssurance(@RequestBody Assurance assurance){
         return  new ResponseEntity<>(assuranceService.saveAssurance(assurance), HttpStatus.CREATED);
     }
