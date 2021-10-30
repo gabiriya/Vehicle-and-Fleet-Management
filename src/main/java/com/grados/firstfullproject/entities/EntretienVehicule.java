@@ -1,0 +1,39 @@
+package com.grados.firstfullproject.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.time.LocalDate;
+
+@Entity
+public class EntretienVehicule {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idEntrVehic;
+
+    private LocalDate dateEntretien;
+
+    private int kmVehicule;
+
+    public EntretienVehicule() {
+    }
+
+    public EntretienVehicule(LocalDate dateEntretien, int kmVehicule) {
+        this.dateEntretien = dateEntretien;
+        this.kmVehicule = kmVehicule;
+    }
+
+    public void setIdEntrVehic(Long idEntrVehic) {
+        this.idEntrVehic = idEntrVehic;
+    }
+
+    public void setDateEntretien(LocalDate dateEntretien) {
+        this.dateEntretien = dateEntretien;
+    }
+
+    public void setKmVehicule(int kmVehicule) {
+        this.kmVehicule = kmVehicule;
+    }
+}

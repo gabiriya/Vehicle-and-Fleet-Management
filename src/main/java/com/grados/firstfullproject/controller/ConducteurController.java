@@ -43,10 +43,11 @@ public class ConducteurController {
     public ResponseEntity<Conducteur> saveConducteur(@RequestBody Conducteur conducteur){
         return new ResponseEntity<>(conducteurService.saveConducteur(conducteur), HttpStatus.CREATED);
     }
-    @GetMapping
+    @GetMapping("/all")
     public List<Conducteur> getAllConducteurs(){
         return conducteurService.findAllConducteurs();
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Conducteur> getConducteurById(@PathVariable("id") Long id){
         return new ResponseEntity<>(conducteurService.getConducteurById(id),HttpStatus.OK);

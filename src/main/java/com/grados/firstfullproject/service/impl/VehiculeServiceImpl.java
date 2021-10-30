@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehiculeServiceImpl implements VehiculeService {
@@ -61,16 +62,25 @@ public class VehiculeServiceImpl implements VehiculeService {
     @Override
     public Vehicule updateVehicule(Vehicule v, Long id) {
 
-
+        Long idAs = v.getAssurance().getId();
         Vehicule updatedVehicule = vehiculeRepository.findById(id).orElseThrow(
                 ()-> new NotFound("Vehicule","Id",id)
         );
+        // find Assurance by id to set it in Vehicule
+        Assurance assurance = assuranceRepository.findById(idAs)
+                .orElseThrow(()-> new NotFound("Assurance","ID",idAs));
 
-        updatedVehicule.setAssurance(v.getAssurance());
-        updatedVehicule.setDateAchat(v.getDateAchat());
-        updatedVehicule.setMarque(v.getMarque());
-        updatedVehicule.setPuissance(v.getPuissance());
-        updatedVehicule.setModel(v.getModel());
+        // check empties
+
+        updatedVehicule.setAssurance(assurance);
+        if (v.getDateAchat()!=null)
+          updatedVehicule.setDateAchat(v.getDateAchat());
+        if (v.getMarque()!=null)
+          updatedVehicule.setMarque(v.getMarque());
+        if (v.getPuissance()!=0)
+         updatedVehicule.setPuissance(v.getPuissance());
+        if (v.getModel()!=null)
+            updatedVehicule.setModel(v.getModel());
 
         vehiculeRepository.save(updatedVehicule);
 
