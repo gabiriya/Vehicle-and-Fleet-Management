@@ -42,9 +42,15 @@ public class ConducteurServiceImpl implements ConducteurService {
         Conducteur updatedConducteur  = conducteurRepository.findById(id).orElseThrow(
                 ()-> new NotFound("Conducteur","Id",id));
 
-        updatedConducteur.setDateNaissance(c.getDateNaissance());
-        updatedConducteur.setNom(c.getNom());
-        updatedConducteur.setPrenom(c.getPrenom());
+        // check if empty
+        if(c.getNom() != null)
+            updatedConducteur.setNom(c.getNom());
+        if (c.getDateNaissance() != null)
+            updatedConducteur.setDateNaissance(c.getDateNaissance());
+        if (c.getPrenom() != null)
+            updatedConducteur.setPrenom(c.getPrenom());
+
+        conducteurRepository.save(updatedConducteur);
         return updatedConducteur;
 
     }
