@@ -41,11 +41,16 @@ public class AssuranceServiceImpl implements AssuranceService {
                 ()-> new AssuranceNotFound("ID",id)
         );
 
-        updatedAssurance.setNom(assurance.getNom());
-        updatedAssurance.setDateAssurance(assurance.getDateAssurance());
-        updatedAssurance.setDateExpiration(assurance.getDateExpiration());
+        // check if empty
+        if(assurance.getNom() != null)
+            updatedAssurance.setNom(assurance.getNom());
+        if(assurance.getDateAssurance() != null)
+            updatedAssurance.setDateAssurance(assurance.getDateAssurance());
+        if(assurance.getDateExpiration() != null)
+            updatedAssurance.setDateExpiration(assurance.getDateExpiration());
 
-        return assurance;
+        assuranceRepository.save(updatedAssurance);
+        return updatedAssurance;
     }
 
     @Override
