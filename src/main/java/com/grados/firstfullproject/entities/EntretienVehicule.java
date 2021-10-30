@@ -25,6 +25,18 @@ public class EntretienVehicule {
         this.kmVehicule = kmVehicule;
     }
 
+    public Long getIdEntrVehic() {
+        return idEntrVehic;
+    }
+
+    public LocalDate getDateEntretien() {
+        return dateEntretien;
+    }
+
+    public int getKmVehicule() {
+        return kmVehicule;
+    }
+
     public void setIdEntrVehic(Long idEntrVehic) {
         this.idEntrVehic = idEntrVehic;
     }
