@@ -1,6 +1,7 @@
 package com.grados.firstfullproject.controller;
 
 import com.grados.firstfullproject.entities.Conducteur;
+import com.grados.firstfullproject.entities.Vehicule;
 import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.ConducteurService;
 import com.grados.firstfullproject.service.VehiculeService;
@@ -61,9 +62,11 @@ public class ConducteurController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String > deleteConducteur(@PathVariable("id") Long id){
         vehiculeRepository.deleteAllVehiculeWithConduct(id);
-
         conducteurService.deleteConducteur(id);
 
-        return new ResponseEntity<>("Conducteur a ete supprimer avec success , ID = " + id,HttpStatus.OK);
+        return new ResponseEntity<>(
+                "Vehicule deleted with id conducteur  = " + id +
+                        "\n conducteur with id = " + id+ " is deleted",
+                HttpStatus.OK);
     }
 }
