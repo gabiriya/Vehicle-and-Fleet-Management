@@ -18,7 +18,6 @@ import java.util.List;
 public class ConducteurController {
 
 
-    private VehiculeService vehiculeService;
 
     private VehiculeRepository vehiculeRepository;
 
@@ -32,10 +31,8 @@ public class ConducteurController {
     @Autowired
     public ConducteurController(
             ConducteurService conducteurService,
-            VehiculeService vehiculeService,
             VehiculeRepository vehiculeRepository) {
         this.conducteurService = conducteurService;
-        this.vehiculeService = vehiculeService;
         this.vehiculeRepository = vehiculeRepository;
     }
 
