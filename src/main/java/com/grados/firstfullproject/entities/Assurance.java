@@ -13,6 +13,16 @@ public class Assurance {
     private LocalDate dateAssurance;
     private LocalDate dateExpiration;
 
+    @OneToOne(cascade = CascadeType.DETACH)
+    private Vehicule vehicule;
+
+    public Vehicule getVehicule() {
+        return vehicule;
+    }
+
+    public void setVehicule(Vehicule vehicule) {
+        this.vehicule = vehicule;
+    }
 
     public Assurance() {
     }
