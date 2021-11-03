@@ -14,8 +14,7 @@ public class Conducteur {
     private LocalDate dateNaissance;
 
 
-    // mapping conducteur with vehicule;
-//    @OneToMany(mappedBy = "conducteur",cascade = {CascadeType.REFRESH})
+//    @OneToMany
 //    private List<Vehicule> vehicules;
 //
 //    public List<Vehicule> getVehicules() {
@@ -25,8 +24,6 @@ public class Conducteur {
 //    public void setVehicules(List<Vehicule> vehicules) {
 //        this.vehicules = vehicules;
 //    }
-
-
 
     public Conducteur() {
     }
