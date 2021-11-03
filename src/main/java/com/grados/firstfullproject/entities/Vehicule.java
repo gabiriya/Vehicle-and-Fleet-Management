@@ -17,7 +17,8 @@ public class Vehicule {
     private LocalDate dateAchat;
 
 
-    @OneToOne(cascade = CascadeType.DETACH)
+    // Mapping Vehicule with Assurance
+    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
     private Assurance assurance;
 
 
@@ -30,7 +31,7 @@ public class Vehicule {
     }
 
 
-    // Mapping Vehicule with conducteur
+//     Mapping Vehicule with conducteur
     @ManyToOne
     private Conducteur conducteur;
 

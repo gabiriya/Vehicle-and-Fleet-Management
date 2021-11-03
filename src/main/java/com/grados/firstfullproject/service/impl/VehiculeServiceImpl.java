@@ -8,20 +8,19 @@ import com.grados.firstfullproject.repository.AssuranceRepository;
 import com.grados.firstfullproject.repository.ConducteurRepository;
 import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.VehiculeService;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class VehiculeServiceImpl implements VehiculeService {
 
-    private VehiculeRepository vehiculeRepository;
+    private final VehiculeRepository vehiculeRepository;
 
-    private AssuranceRepository assuranceRepository;
+    private final AssuranceRepository assuranceRepository;
 
-    private ConducteurRepository conducteurRepository;
+    private final ConducteurRepository conducteurRepository;
 
 
     public VehiculeServiceImpl(
@@ -36,12 +35,12 @@ public class VehiculeServiceImpl implements VehiculeService {
     @Override
     public Vehicule saveVehicule(Vehicule v, Long idAssurance,Long idConducteur) {
 
-        Object assurance = assuranceRepository.findById(idAssurance).orElseThrow(()->
-                new NotFound("Assurance","Id",idAssurance));
+        Object assurance = assuranceRepository.findById(idAssurance).orElseThrow(
+                ()-> new NotFound("Assurance","Id",idAssurance));
+
         Object conducteur = conducteurRepository.findById(idConducteur).orElseThrow(
                 ()-> new NotFound("Conducteur","id",idConducteur)
         );
-        System.out.println("conducteur = " + idConducteur);
         v.setAssurance( (Assurance) assurance);
         v.setConducteur((Conducteur) conducteur);
         return vehiculeRepository.save(v);
