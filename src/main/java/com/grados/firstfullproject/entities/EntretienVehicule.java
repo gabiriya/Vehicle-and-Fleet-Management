@@ -1,9 +1,6 @@
 package com.grados.firstfullproject.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -16,6 +13,31 @@ public class EntretienVehicule {
     private LocalDate dateEntretien;
 
     private int kmVehicule;
+
+    // entretien Vehicule with vehicule
+    @ManyToOne()
+    private Vehicule vehicule;
+
+    public Vehicule getVehicule() {
+        return vehicule;
+    }
+
+    public void setVehicule(Vehicule vehicule) {
+        this.vehicule = vehicule;
+    }
+
+
+    // entretien with entretienVehicule
+    @ManyToOne()
+    private Entretien entretien;
+
+    public Entretien getEntretien() {
+        return entretien;
+    }
+
+    public void setEntretien(Entretien entretien) {
+        this.entretien = entretien;
+    }
 
     public EntretienVehicule() {
     }
