@@ -1,5 +1,7 @@
 package com.grados.firstfullproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -18,7 +20,11 @@ public class Vehicule {
 
 
     // Mapping Vehicule with Assurance
-    @OneToOne(cascade = CascadeType.DETACH,fetch = FetchType.EAGER)
+    @OneToOne(
+            cascade = CascadeType.DETACH,
+            fetch = FetchType.LAZY
+    )
+    @JsonIgnore
     private Assurance assurance;
 
 
@@ -32,7 +38,8 @@ public class Vehicule {
 
 
 //     Mapping Vehicule with conducteur
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Conducteur conducteur;
 
     public Conducteur getConducteur() {
@@ -42,7 +49,7 @@ public class Vehicule {
     public void setConducteur(Conducteur conducteur) {
         this.conducteur = conducteur;
     }
-
+//----------
     public Vehicule() {
     }
 
@@ -51,7 +58,6 @@ public class Vehicule {
         this.model = model;
         this.puissance = puissance;
         this.dateAchat = dateAchat;
-
     }
 
     public Long getId() {
