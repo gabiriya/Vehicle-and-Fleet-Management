@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/assurance")
 public class AssuranceController {
 
-    private AssuranceService assuranceService;
+    private final AssuranceService assuranceService;
 
     public AssuranceController(AssuranceService assuranceService) {
         this.assuranceService = assuranceService;
