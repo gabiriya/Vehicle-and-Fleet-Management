@@ -21,8 +21,8 @@ public class Vehicule {
 
     // Mapping Vehicule with Assurance
     @OneToOne(
-            cascade = CascadeType.DETACH,
-            fetch = FetchType.LAZY
+            cascade = CascadeType.DETACH
+//            ,fetch = FetchType.LAZY
     )
     @JsonIgnore
     private Assurance assurance;
@@ -38,7 +38,7 @@ public class Vehicule {
 
 
 //     Mapping Vehicule with conducteur
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private Conducteur conducteur;
 

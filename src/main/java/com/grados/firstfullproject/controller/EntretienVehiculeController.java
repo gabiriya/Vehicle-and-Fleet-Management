@@ -2,7 +2,6 @@ package com.grados.firstfullproject.controller;
 
 import com.grados.firstfullproject.entities.EntretienVehicule;
 import com.grados.firstfullproject.service.EntretienVehiculeService;
-import com.grados.firstfullproject.service.VehiculeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +13,11 @@ import java.util.List;
 @RequestMapping("/entretienVehicule")
 public class EntretienVehiculeController {
 
-    private EntretienVehiculeService entretienVehiculeService;
-    private VehiculeService vehiculeService;
+    private final EntretienVehiculeService entretienVehiculeService;
 
     @Autowired
-    public EntretienVehiculeController(EntretienVehiculeService entretienVehiculeService, VehiculeService vehiculeService) {
+    public EntretienVehiculeController(EntretienVehiculeService entretienVehiculeService) {
         this.entretienVehiculeService = entretienVehiculeService;
-        this.vehiculeService = vehiculeService;
     }
 
     @PostMapping

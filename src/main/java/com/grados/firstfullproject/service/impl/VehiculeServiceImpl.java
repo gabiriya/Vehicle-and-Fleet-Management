@@ -62,12 +62,13 @@ public class VehiculeServiceImpl implements VehiculeService {
     public Vehicule updateVehicule(Vehicule v, Long id) {
 
         Long idAs = v.getAssurance().getId();
-        Vehicule updatedVehicule = vehiculeRepository.findById(id).orElseThrow(
-                ()-> new NotFound("Vehicule","Id",id)
-        );
+        System.out.println("------------------------------------- \n " + idAs);
         // find Assurance by id to set it in Vehicule
         Assurance assurance = assuranceRepository.findById(idAs)
                 .orElseThrow(()-> new NotFound("Assurance","ID",idAs));
+        Vehicule updatedVehicule = vehiculeRepository.findById(id).orElseThrow(
+                ()-> new NotFound("Vehicule","Id",id)
+        );
 
         // check empties
 
