@@ -1,6 +1,8 @@
 package com.grados.firstfullproject.entities;
 
 
+
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -13,8 +15,12 @@ public class Assurance {
     private LocalDate dateAssurance;
     private LocalDate dateExpiration;
 
-    @OneToOne(cascade = CascadeType.DETACH)
+    @OneToOne(
+//            cascade = CascadeType.DETACH,
+            mappedBy = "assurance")
+//    @JsonIgnore
     private Vehicule vehicule;
+
 
     public Vehicule getVehicule() {
         return vehicule;
