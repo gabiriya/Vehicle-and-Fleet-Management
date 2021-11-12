@@ -1,5 +1,7 @@
 package com.grados.firstfullproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -15,7 +17,8 @@ public class EntretienVehicule {
     private int kmVehicule;
 
     // entretien Vehicule with vehicule
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Vehicule vehicule;
 
     public Vehicule getVehicule() {
@@ -29,6 +32,7 @@ public class EntretienVehicule {
 
     // entretien with entretienVehicule
     @ManyToOne()
+    @JoinColumn(name = "id_entretien")
     private Entretien entretien;
 
     public Entretien getEntretien() {

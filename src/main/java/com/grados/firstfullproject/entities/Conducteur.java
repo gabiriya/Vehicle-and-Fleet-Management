@@ -14,16 +14,16 @@ public class Conducteur {
     private LocalDate dateNaissance;
 
 
-//    @OneToMany
-//    private List<Vehicule> vehicules;
-//
-//    public List<Vehicule> getVehicules() {
-//        return vehicules;
-//    }
-//
-//    public void setVehicules(List<Vehicule> vehicules) {
-//        this.vehicules = vehicules;
-//    }
+    @OneToMany
+    private List<Vehicule> vehicules;
+
+    public List<Vehicule> getVehicules() {
+        return vehicules;
+    }
+
+    public void setVehicules(List<Vehicule> vehicules) {
+        this.vehicules = vehicules;
+    }
 
     public Conducteur() {
     }
