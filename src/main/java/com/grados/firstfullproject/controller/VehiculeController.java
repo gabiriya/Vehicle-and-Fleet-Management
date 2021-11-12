@@ -2,9 +2,7 @@ package com.grados.firstfullproject.controller;
 
 
 import com.grados.firstfullproject.DTO.CarDriversDTO;
-import com.grados.firstfullproject.DTO.VehiculeDTO;
 import com.grados.firstfullproject.entities.Vehicule;
-import com.grados.firstfullproject.mapper.VehiculeMapper;
 import com.grados.firstfullproject.service.VehiculeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,16 +15,11 @@ import java.util.List;
 @RequestMapping(("/vehicule"))
 public class VehiculeController {
 
-    private final VehiculeService vehiculeService;
-    private final VehiculeMapper vehiculeMapper;
+    private VehiculeService vehiculeService;
 
     @Autowired
-    public VehiculeController(
-            VehiculeService vehiculeService,
-            VehiculeMapper vehiculeMapper
-    ) {
+    public VehiculeController(VehiculeService vehiculeService) {
         this.vehiculeService = vehiculeService;
-        this.vehiculeMapper = vehiculeMapper;
     }
 
     @PostMapping
@@ -56,9 +49,7 @@ public class VehiculeController {
 
     // update
     @PutMapping("{id}")
-    public ResponseEntity<Vehicule> updateVehicule(
-            @PathVariable("id") Long id,
-            @RequestBody Vehicule vehicule)
+    public ResponseEntity<Vehicule> updateVehicule(@PathVariable("id") Long id, @RequestBody Vehicule vehicule)
     {
         return new ResponseEntity<>(vehiculeService.updateVehicule(vehicule,id),HttpStatus.OK);
     }
@@ -67,13 +58,5 @@ public class VehiculeController {
     @GetMapping("/cars")
     public List<CarDriversDTO> getCarDriversDTOS(){
         return vehiculeService.getllCarDriver();
-    }
-
-   // get vehicule with conducteur and assurance and date exp assurance
-    @GetMapping("/car/{id}")
-    public VehiculeDTO getVehiculeDto(@PathVariable("id") Long id){
-        return vehiculeMapper.VehiculeToDto(
-                vehiculeService.getVehiculeById(id)
-        );
     }
 }
