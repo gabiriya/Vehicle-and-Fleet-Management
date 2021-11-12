@@ -1,15 +1,14 @@
 package com.grados.firstfullproject.controller;
 
 
+import com.grados.firstfullproject.DTO.CarDriversDTO;
 import com.grados.firstfullproject.entities.Vehicule;
-import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.VehiculeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -53,5 +52,11 @@ public class VehiculeController {
     public ResponseEntity<Vehicule> updateVehicule(@PathVariable("id") Long id, @RequestBody Vehicule vehicule)
     {
         return new ResponseEntity<>(vehiculeService.updateVehicule(vehicule,id),HttpStatus.OK);
+    }
+
+    // get vehicule(dto)
+    @GetMapping("/cars")
+    public List<CarDriversDTO> getCarDriversDTOS(){
+        return vehiculeService.getllCarDriver();
     }
 }
