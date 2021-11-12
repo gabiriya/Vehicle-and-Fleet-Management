@@ -15,7 +15,7 @@ public class Assurance {
 
     @OneToOne(cascade = CascadeType.DETACH)
     private Vehicule vehicule;
-    // this is dto implementation
+
     public Vehicule getVehicule() {
         return vehicule;
     }

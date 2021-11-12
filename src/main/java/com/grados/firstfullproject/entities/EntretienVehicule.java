@@ -18,7 +18,7 @@ public class EntretienVehicule {
 
     // entretien Vehicule with vehicule
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @JsonIgnore
     private Vehicule vehicule;
 
     public Vehicule getVehicule() {
