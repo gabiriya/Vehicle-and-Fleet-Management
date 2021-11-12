@@ -69,7 +69,7 @@ public class EntretienVehiculeServiceImpl implements EntretienVehiculeService {
     @Override
     public void deleteEntretienVehicule(Long id) {
         entretienVehiculeRepository.findById(id).orElseThrow(
-                ()-> new NotFound("Entretien Vehicule","ID",id));
+                ()->new NotFound("Entretien Vehicule","ID",id));
         entretienVehiculeRepository.deleteById(id);
     }
 }
