@@ -1,7 +1,9 @@
 package com.grados.firstfullproject.controller;
 
+import com.grados.firstfullproject.DTO.ConducteurDTO;
 import com.grados.firstfullproject.entities.Conducteur;
 import com.grados.firstfullproject.entities.Vehicule;
+import com.grados.firstfullproject.mapper.ConducteurMapper;
 import com.grados.firstfullproject.repository.VehiculeRepository;
 import com.grados.firstfullproject.service.ConducteurService;
 import com.grados.firstfullproject.service.VehiculeService;
@@ -20,20 +22,21 @@ public class ConducteurController {
 
 
     private VehiculeRepository vehiculeRepository;
-
-
-    public ConducteurController() {
-
-    }
-
     private ConducteurService conducteurService;
+    private ConducteurMapper conducteurMapper;
 
     @Autowired
     public ConducteurController(
             ConducteurService conducteurService,
-            VehiculeRepository vehiculeRepository) {
+            VehiculeRepository vehiculeRepository,
+            ConducteurMapper conducteurMapper) {
         this.conducteurService = conducteurService;
         this.vehiculeRepository = vehiculeRepository;
+        this.conducteurMapper = conducteurMapper;
+    }
+
+    public ConducteurController() {
+
     }
 
     @PostMapping
@@ -66,5 +69,13 @@ public class ConducteurController {
                 "Vehicule deleted with id conducteur  = " + id +
                         "\n conducteur with id = " + id+ " is deleted",
                 HttpStatus.OK);
+    }
+
+    // ConducteurDTO
+    @GetMapping("/driver/{id}")
+    public ConducteurDTO getDriver(@PathVariable("id") Long id){
+        return conducteurMapper.ConducteurToDTO(
+                conducteurService.getConducteurById(id)
+        );
     }
 }
