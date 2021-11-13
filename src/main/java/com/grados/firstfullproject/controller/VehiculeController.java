@@ -23,8 +23,8 @@ public class VehiculeController {
     @Autowired
     public VehiculeController(
             VehiculeService vehiculeService,
-            // ERROR Could not autowire. No beans of 'VehiculeMapper' type found.
-            VehiculeMapper vehiculeMapper) {
+            VehiculeMapper vehiculeMapper
+    ) {
         this.vehiculeService = vehiculeService;
         this.vehiculeMapper = vehiculeMapper;
     }
@@ -69,7 +69,7 @@ public class VehiculeController {
         return vehiculeService.getllCarDriver();
     }
 
-    // get vehicule with conducteur and assurance and date exp assurance
+   // get vehicule with conducteur and assurance and date exp assurance
     @GetMapping("/car/{id}")
     public VehiculeDTO getVehiculeDto(@PathVariable("id") Long id){
         return vehiculeMapper.VehiculeToDto(
