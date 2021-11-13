@@ -5,6 +5,7 @@ import com.grados.firstfullproject.entities.Assurance;
 import com.grados.firstfullproject.entities.Conducteur;
 import com.grados.firstfullproject.entities.Vehicule;
 import com.grados.firstfullproject.exception.NotFound;
+import com.grados.firstfullproject.mapper.VehiculeMapper;
 import com.grados.firstfullproject.repository.AssuranceRepository;
 import com.grados.firstfullproject.repository.ConducteurRepository;
 import com.grados.firstfullproject.repository.VehiculeRepository;
@@ -23,7 +24,6 @@ public class VehiculeServiceImpl implements VehiculeService {
     private final AssuranceRepository assuranceRepository;
 
     private final ConducteurRepository conducteurRepository;
-
 
     public VehiculeServiceImpl(
             VehiculeRepository vehiculeRepository,
