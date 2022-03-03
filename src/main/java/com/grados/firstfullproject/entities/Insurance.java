@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Assurance {
+public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -15,25 +15,25 @@ public class Assurance {
     private LocalDate dateAssurance;
     private LocalDate dateExpiration;
 
-    @OneToOne(
-//            cascade = CascadeType.DETACH,
-            mappedBy = "assurance")
-//    @JsonIgnore
-    private Vehicule vehicule;
+//    @OneToOne(
+////            cascade = CascadeType.DETACH,
+//            mappedBy = "assurance")
+////    @JsonIgnore
+//    private Vehicule vehicule;
+//
+//
+//    public Vehicule getVehicule() {
+//        return vehicule;
+//    }
+//
+//    public void setVehicule(Vehicule vehicule) {
+//        this.vehicule = vehicule;
+//    }
 
-
-    public Vehicule getVehicule() {
-        return vehicule;
+    public Insurance() {
     }
 
-    public void setVehicule(Vehicule vehicule) {
-        this.vehicule = vehicule;
-    }
-
-    public Assurance() {
-    }
-
-    public Assurance(String nom, LocalDate dateAssurance, LocalDate dateExpiration) {
+    public Insurance(String nom, LocalDate dateAssurance, LocalDate dateExpiration) {
         this.nom = nom;
         this.dateAssurance = dateAssurance;
         this.dateExpiration = dateExpiration;
