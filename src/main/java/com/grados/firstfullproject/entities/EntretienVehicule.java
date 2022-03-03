@@ -17,31 +17,31 @@ public class EntretienVehicule {
     private int kmVehicule;
 
     // entretien Vehicule with vehicule
-    @ManyToOne(fetch = FetchType.LAZY)
-//    @JsonIgnore
-    private Vehicule vehicule;
-
-    public Vehicule getVehicule() {
-        return vehicule;
-    }
-
-    public void setVehicule(Vehicule vehicule) {
-        this.vehicule = vehicule;
-    }
+//    @ManyToOne(fetch = FetchType.LAZY)
+////    @JsonIgnore
+//    private Vehicle vehicule;
+//
+//    public Vehicle getVehicule() {
+//        return vehicule;
+//    }
+//
+//    public void setVehicule(Vehicle vehicule) {
+//        this.vehicule = vehicule;
+//    }
 
 
     // entretien with entretienVehicule
-    @ManyToOne()
-    @JoinColumn(name = "id_entretien")
-    private Entretien entretien;
-
-    public Entretien getEntretien() {
-        return entretien;
-    }
-
-    public void setEntretien(Entretien entretien) {
-        this.entretien = entretien;
-    }
+//    @ManyToOne()
+//    @JoinColumn(name = "id_maintenance")
+//    private Maintenance maintenance;
+//
+//    public Maintenance getEntretien() {
+//        return maintenance;
+//    }
+//
+//    public void setEntretien(Maintenance entretien) {
+//        this.maintenance = entretien;
+//    }
 
     public EntretienVehicule() {
     }

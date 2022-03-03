@@ -1,12 +1,13 @@
 package com.grados.firstfullproject.service.impl;
 
 import com.grados.firstfullproject.entities.EntretienVehicule;
-import com.grados.firstfullproject.entities.Vehicule;
+import com.grados.firstfullproject.entities.Vehicle;
+import com.grados.firstfullproject.entities.Vehicle;
 import com.grados.firstfullproject.exception.NotFound;
 import com.grados.firstfullproject.repository.EntretienVehiculeRepository;
-import com.grados.firstfullproject.repository.VehiculeRepository;
+import com.grados.firstfullproject.repository.VehicleRepository;
 import com.grados.firstfullproject.service.EntretienVehiculeService;
-import com.grados.firstfullproject.service.VehiculeService;
+import com.grados.firstfullproject.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +17,12 @@ import java.util.List;
 public class EntretienVehiculeServiceImpl implements EntretienVehiculeService {
 
     private EntretienVehiculeRepository entretienVehiculeRepository;
-    private VehiculeRepository vehiculeRepository;
+    private VehicleRepository vehicleRepository;
 
-    public EntretienVehiculeServiceImpl(EntretienVehiculeRepository entretienVehiculeRepository, VehiculeRepository vehiculeRepository) {
+    @Autowired
+    public EntretienVehiculeServiceImpl(EntretienVehiculeRepository entretienVehiculeRepository, VehicleRepository vehicleRepository) {
         this.entretienVehiculeRepository = entretienVehiculeRepository;
-        this.vehiculeRepository = vehiculeRepository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class EntretienVehiculeServiceImpl implements EntretienVehiculeService {
         Object vehicule = entretienVehiculeRepository.findById(id).orElseThrow(
                 ()-> new NotFound("Vehicule","ID",id)
         );
-        entretienVehicule.setVehicule((Vehicule) vehicule);
+//        entretienVehicule.setVehicle((Vehicle) vehicule);
         return entretienVehiculeRepository.save(entretienVehicule);
     }
 
@@ -52,15 +54,15 @@ public class EntretienVehiculeServiceImpl implements EntretienVehiculeService {
                         ()-> new NotFound("EntetienVehicule","ID",id)
                 );
 
-        if(ev.getDateEntretien() != null)
-            updatedEV.setDateEntretien(ev.getDateEntretien());
-        if(ev.getKmVehicule() != 0)
-            updatedEV.setKmVehicule(ev.getKmVehicule());
-        if(ev.getVehicule().getId() != 0){
-            Vehicule v = vehiculeRepository.findById(ev.getVehicule().getId()).orElseThrow(
-                    ()-> new NotFound("Vehicule","id",ev.getVehicule().getId()));
-            updatedEV.setVehicule(v);
-        }
+//        if(ev.getDateEntretien() != null)
+//            updatedEV.setDateEntretien(ev.getDateEntretien());
+//        if(ev.getKmVehicule() != 0)
+//            updatedEV.setKmVehicule(ev.getKmVehicule());
+//        if(ev.getVehicule().getId() != 0){
+//            Vehicle v = vehicleRepository.findById(ev.getVehicule().getId()).orElseThrow(
+//                    ()-> new NotFound("Vehicule","id",ev.getVehicule().getId()));
+//            updatedEV.setVehicule(v);
+//        }
 
         entretienVehiculeRepository.save(updatedEV);
         return updatedEV;

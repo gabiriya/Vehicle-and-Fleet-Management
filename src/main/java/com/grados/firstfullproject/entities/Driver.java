@@ -14,15 +14,16 @@ public class Driver {
     private LocalDate dateOfBirth;
 
 
-    @OneToMany
-    private List<Vehicule> vehicules;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_driver_fk")
+    private List<Vehicle> vehicles;
 
-    public List<Vehicule> getVehicules() {
-        return vehicules;
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setVehicules(List<Vehicule> vehicules) {
-        this.vehicules = vehicules;
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     public Driver() {

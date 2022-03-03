@@ -11,9 +11,9 @@ public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nom;
-    private LocalDate dateAssurance;
-    private LocalDate dateExpiration;
+    private String name;
+    private LocalDate dateOfInsurance;
+    private LocalDate expirationDate;
 
 //    @OneToOne(
 ////            cascade = CascadeType.DETACH,
@@ -33,10 +33,10 @@ public class Insurance {
     public Insurance() {
     }
 
-    public Insurance(String nom, LocalDate dateAssurance, LocalDate dateExpiration) {
-        this.nom = nom;
-        this.dateAssurance = dateAssurance;
-        this.dateExpiration = dateExpiration;
+    public Insurance(String name, LocalDate dateOfInsurance, LocalDate expirationDate) {
+        this.name = name;
+        this.dateOfInsurance = dateOfInsurance;
+        this.expirationDate = expirationDate;
     }
 
     public Long getId() {
@@ -47,27 +47,27 @@ public class Insurance {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String nom) {
+        this.name = nom;
     }
 
-    public LocalDate getDateAssurance() {
-        return dateAssurance;
+    public LocalDate getDateOfInsurance() {
+        return dateOfInsurance;
     }
 
-    public void setDateAssurance(LocalDate dateAssurance) {
-        this.dateAssurance = dateAssurance;
+    public void setDateOfInsurance(LocalDate dateAssurance) {
+        this.dateOfInsurance = dateAssurance;
     }
 
-    public LocalDate getDateExpiration() {
-        return dateExpiration;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setDateExpiration(LocalDate dateExpiration) {
-        this.dateExpiration = dateExpiration;
+    public void setExpirationDate(LocalDate dateExpiration) {
+        this.expirationDate = dateExpiration;
     }
 }

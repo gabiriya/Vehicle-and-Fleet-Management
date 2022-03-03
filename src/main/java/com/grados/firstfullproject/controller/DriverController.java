@@ -1,67 +1,66 @@
 package com.grados.firstfullproject.controller;
 
 import com.grados.firstfullproject.DTO.DriverDTO;
-import com.grados.firstfullproject.mapper.DriverMapper;
-import com.grados.firstfullproject.repository.VehiculeRepository;
-import com.grados.firstfullproject.service.ConducteurService;
+import com.grados.firstfullproject.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/conducteur")
+@RequestMapping("/driver")
 public class DriverController {
 
 
-    private ConducteurService conducteurService;
+    private DriverService driverService;
 
     @Autowired
-    public DriverController(ConducteurService conducteurService) {
-        this.conducteurService = conducteurService;
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
     }
 
     public DriverController() {
 
     }
 
+    // get all
+    @GetMapping
+    public List<DriverDTO> getAllDrivers(){
+        return driverService.findAllDrivers();
+    }
+
+    // save driver
     @PostMapping
-    public ResponseEntity<DriverDTO> saveConducteur(@RequestBody DriverDTO driver){
-        return new ResponseEntity<>(conducteurService.saveDriver(driver), HttpStatus.CREATED);
-    }
-    @GetMapping("/all")
-    public List<DriverDTO> getAllConducteurs(){
-        return conducteurService.findAllDrivers();
+    public ResponseEntity<?> saveDriver(@RequestBody DriverDTO driver){
+        return new ResponseEntity<>(driverService.saveDriver(driver), HttpStatus.CREATED);
     }
 
+    // get driver by id
     @GetMapping("/{id}")
-    public ResponseEntity<DriverDTO> getConducteurById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(conducteurService.getDriverById(id),HttpStatus.OK);
+    public ResponseEntity<DriverDTO> getDriverById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(driverService.getDriverById(id),HttpStatus.OK);
     }
 
+    // update a driver
     @PutMapping("/{id}")
-    public ResponseEntity<DriverDTO> updateConducteur(
+    public ResponseEntity<DriverDTO> updateDriver(
             @PathVariable("id") Long id,
             @RequestBody DriverDTO driver){
-        return new ResponseEntity<>(conducteurService.updateDriver(driver,id),HttpStatus.OK);
+        return new ResponseEntity<>(driverService.updateDriver(driver,id),HttpStatus.OK);
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String > deleteConducteur(@PathVariable("id") Long id){
-//        vehiculeRepository.deleteAllVehiculeWithConduct(id);
-//        conducteurService.deleteConducteur(id);
-//
-//        return new ResponseEntity<>(
-//                "Vehicule deleted with id conducteur  = " + id +
-//                        "\n conducteur with id = " + id+ " is deleted",
-//                HttpStatus.OK);
-//    }
+    // delete driver by id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String > deleteDriver(@PathVariable("id") Long id){
+        driverService.deleteConducteur(id);
 
-    // ConducteurDTO
-    @GetMapping("/driver/{id}")
-    public DriverDTO getDriver(@PathVariable("id") Long id){
-        return conducteurService.getDriverById(id);
+        return new ResponseEntity<>(
+                "Vehicule deleted with id conducteur  = " + id +
+                        "\n conducteur with id = " + id+ " is deleted",
+                HttpStatus.OK);
     }
+
 }
