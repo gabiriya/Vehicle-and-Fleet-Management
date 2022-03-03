@@ -6,7 +6,7 @@ public class NotFound extends RuntimeException{
     private Object fieldValue;
 
     public NotFound(String className, String fieldName, Object fieldValue){
-        super(String.format("'%s' not found with %s : '%s'",className,fieldName,fieldValue));
+        super(String.format("%s not found with %s : '%s'",className,fieldName,fieldValue));
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
         this.className = className;
