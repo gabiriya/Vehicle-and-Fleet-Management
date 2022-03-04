@@ -10,43 +10,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/entretien")
+@RequestMapping("/maintenance")
 public class MaintenanceController {
 
-    private final MaintenanceService entretienService;
+    private final MaintenanceService maintenanceService;
     @Autowired
 
-    public MaintenanceController(MaintenanceService entretienService) {
-        this.entretienService = entretienService;
+    public MaintenanceController(MaintenanceService maintenanceService) {
+        this.maintenanceService = maintenanceService;
     }
 
     @PostMapping
-    public ResponseEntity<Maintenance> saveConducteur(@RequestBody Maintenance entretien){
-        return new ResponseEntity<>(entretienService.saveMaintenance(entretien), HttpStatus.CREATED);
+    public ResponseEntity<Maintenance> saveConducteur(@RequestBody Maintenance maintenance){
+        return new ResponseEntity<>(maintenanceService.saveMaintenance(maintenance), HttpStatus.CREATED);
     }
     @GetMapping("/all")
     public List<Maintenance> getAllConducteurs(){
-        return entretienService.findAllMaintenance();
+        return maintenanceService.findAllMaintenance();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Maintenance> getConducteurById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(entretienService.getMaintenanceById(id),HttpStatus.OK);
+        return new ResponseEntity<>(maintenanceService.getMaintenanceById(id),HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Maintenance> updateConducteur(
             @PathVariable("id") Long id,
-            @RequestBody Maintenance entretien){
-        return new ResponseEntity<>(entretienService.updateMaintenance(entretien,id),HttpStatus.OK);
+            @RequestBody Maintenance maintenance){
+        return new ResponseEntity<>(maintenanceService.updateMaintenance(maintenance,id),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String > deleteConducteur(@PathVariable("id") Long id){
-        entretienService.deleteMaintenance(id);
+        maintenanceService.deleteMaintenance(id);
 
         return new ResponseEntity<>(
-                "Maintenance bien supprimee",
+                "Maintenance is deleted",
                 HttpStatus.OK);
     }
 }
