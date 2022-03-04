@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 
 
 @Mapper(componentModel = "spring")
-public interface VehiculeMapper {
+public interface VehicleMapper {
 
 //    @Mapping(target = "dateExpAssurance", source = "assurance.dateExpiration")
 //    @Mapping(target = "marque", source = "marque")
