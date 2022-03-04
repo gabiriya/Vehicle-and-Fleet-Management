@@ -17,15 +17,12 @@ import java.util.List;
 public class VehicleController {
 
     private final VehicleService vehiculeService;
-    private final VehicleMapper vehicleMapper;
 
     @Autowired
     public VehicleController(
-            VehicleService vehiculeService,
-            VehicleMapper vehicleMapper
+            VehicleService vehiculeService
     ) {
         this.vehiculeService = vehiculeService;
-        this.vehicleMapper = vehicleMapper;
     }
 
     @PostMapping("/{idDriver}")
