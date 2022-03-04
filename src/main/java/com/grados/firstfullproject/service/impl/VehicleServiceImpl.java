@@ -27,33 +27,37 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Vehicle saveVehicle(Vehicle v,Long idDriver) {
 
-        var conducteur = driverRepository.findById(idDriver).orElseThrow(
-                ()-> new NotFound("Conducteur","id",idDriver)
+        var driver = driverRepository.findById(idDriver).orElseThrow(
+                ()-> new NotFound("Driver","id",idDriver)
         );
-        var vehicle = vehicleRepository.findById(v.getId()).orElseThrow(
-                ()-> new NotFound("Vehicle","ID",v.getId()));
-
-        conducteur.getVehicles().add(vehicle);
-        return vehicleRepository.save(vehicle);
+        driver.getVehicles().add(v);
+        return vehicleRepository.save(v);
     }
 
     @Override
-    public List<Vehicle> findAllVehicles() {
-        return vehicleRepository.findAllVehicules();
+    public List<Vehicle> findAllVehicles(Long idDriver) {
+        return vehicleRepository.findAllVehicles(idDriver);
     }
 
     @Override
-    public Vehicle getVehiculeById(Long id) {
-        return vehicleRepository.findById(id).orElseThrow(
-                ()-> new NotFound("Vehicule","Id",id)
+    public Vehicle getVehiculeById(Long idDriver, Long idVehicle) {
+        driverRepository.findById(idDriver).orElseThrow(
+                ()-> new NotFound("Driver","ID",idDriver)
+        );
+        return vehicleRepository.findVehicleById(idVehicle).orElseThrow(
+                ()-> new NotFound("Vehicule","Id",idVehicle)
         );
     }
 
     @Override
-    public Vehicle updateVehicle(Vehicle v, Long id) {
+    public Vehicle updateVehicle(Long idDriver,Vehicle v ,Long idVehicle ) {
 
-        Vehicle updatedVehicle = vehicleRepository.findById(id).orElseThrow(
-                ()-> new NotFound("Vehicule","Id",id)
+        Vehicle updatedVehicle = vehicleRepository.findById(idVehicle).orElseThrow(
+                ()-> new NotFound("Vehicule","Id",idVehicle)
+        );
+
+        driverRepository.findById(idDriver).orElseThrow(
+                () -> new NotFound("Driver","ID",idDriver)
         );
 
         // check empties
@@ -73,27 +77,15 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public void deleteVehicle(Long id) {
-        vehicleRepository.findById(id).orElseThrow(()->new NotFound("Vehicule","ID",id));
-        vehicleRepository.deleteById(id);
-    }
+    public void deleteVehicle(Long idDriver,Long idVehicle) {
 
-    // POJO
-//    @Override
-//    public List<CarDriversDTO> getAllCarDriver() {
-//        return vehiculeRepository.findAll()
-//                .stream()
-//                .map(this::carDriverEntityToDTO)
-//                .collect(Collectors.toList());
-//    }
-//
-//    @Override
-//    public CarDriversDTO carDriverEntityToDTO(Vehicule vehicule) {
-//        CarDriversDTO carDriversDTO = new CarDriversDTO();
-//        carDriversDTO.setId(vehicule.getId());
-//        carDriversDTO.setNom(vehicule.getConducteur().getNom());
-//        carDriversDTO.setPrenom(vehicule.getConducteur().getPrenom());
-//        return  carDriversDTO;
-//    }
+        driverRepository.findById(idDriver).orElseThrow(
+                () -> new NotFound("Driver","ID",idDriver)
+        );
+
+        vehicleRepository.findById(idVehicle).orElseThrow(
+                ()->new NotFound("Vehicule","ID",idVehicle));
+        vehicleRepository.deleteVehicleById(idDriver,idVehicle);
+    }
 
 }
