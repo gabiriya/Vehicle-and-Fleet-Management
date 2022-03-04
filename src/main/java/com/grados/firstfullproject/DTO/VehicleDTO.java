@@ -12,8 +12,5 @@ public class VehicleDTO {
     private LocalDate model;
     private int horsePower;
     private LocalDate dateOfPurchase;
-//    private String assurance;
-//    private LocalDate dateExpAssurance;
-
 
 }
