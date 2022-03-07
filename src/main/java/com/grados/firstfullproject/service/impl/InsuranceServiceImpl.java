@@ -12,34 +12,43 @@ import java.util.List;
 @Service
 public class InsuranceServiceImpl implements InsuranceService {
 
-    private final InsuranceRepository assuranceRepository;
-    private final VehicleRepository vehicleRepository;
+    private final InsuranceRepository insuranceRepository;
+    private final InsuranceMapper mapper;
 
-    public InsuranceServiceImpl(InsuranceRepository assuranceRepository, VehicleRepository vehicleRepository) {
-        this.assuranceRepository = assuranceRepository;
-        this.vehicleRepository = vehicleRepository;
+    public InsuranceServiceImpl(InsuranceRepository insuranceRepository,
+                                InsuranceMapper mapper) {
+        this.insuranceRepository = insuranceRepository;
+        this.mapper = mapper;
     }
 
     @Override
-    public Insurance saveInsurance(Insurance insurance) {
-        return assuranceRepository.save(insurance);
+    public InsuranceDTO saveInsurance(Long idVec,InsuranceDTO insuranceDto) {
+
+        var insuranceX = insuranceRepository.findInsuranceById(idVec,insuranceDto.getId());
+        var dateInsurance = insuranceX.getExpirationDate();
+        if (dateInsurance.compareTo(LocalDate.now()) < 0)
+            throw new InsuranceNotFound("date problem",insuranceX);
+        var insurance = mapper.dtoToInsurance(insuranceDto);
+
+        return mapper.insuranceToDTO(insuranceRepository.save(insurance));
     }
 
     @Override
-    public List<Insurance> findAllInsurances() {
-        return assuranceRepository.findAll();
+    public List<InsuranceDTO> findAllInsurances(Long idVec) {
+        var insurances = insuranceRepository.findAllByVehicle(idVec);
+        return mapper.insurancesToDTOs(insurances);
     }
 
     @Override
-    public Insurance getInsuranceById(Long id) {
-        Insurance insurance = assuranceRepository.findById(id).orElseThrow(
+    public InsuranceDTO getInsuranceById(Long id) {
+        Insurance insurance = insuranceRepository.findById(id).orElseThrow(
                 ()-> new InsuranceNotFound("ID",id)
         );
-        return insurance;
+        return mapper.insuranceToDTO(insurance);
     }
 
     @Override
-    public Insurance updateInsurance(Insurance insurance, Long id) {
+    public InsuranceDTO updateInsurance(InsuranceDTO insurance, Long id) {
 //        Long idv = assurance.getVehicule().getId();
 //        Vehicle vehicule = vehiculeRepository.findById(idv).orElseThrow(
 //                ()-> new NotFound("Vehicule","ID",idv)
@@ -57,8 +66,9 @@ public class InsuranceServiceImpl implements InsuranceService {
         if(insurance.getExpirationDate() != null)
             updatedAssurance.setExpirationDate(insurance.getExpirationDate());
 
-        assuranceRepository.save(updatedAssurance);
-        return updatedAssurance;
+        insuranceRepository.save(updatedAssurance);
+
+        return  mapper.insuranceToDTO(updatedAssurance);
     }
 
     @Override
