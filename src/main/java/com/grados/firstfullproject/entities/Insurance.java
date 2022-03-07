@@ -3,6 +3,8 @@ package com.grados.firstfullproject.entities;
 
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -12,22 +14,27 @@ public class Insurance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfInsurance;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
+
 
 //    @OneToOne(
 ////            cascade = CascadeType.DETACH,
-//            mappedBy = "assurance")
+//            mappedBy = "insurance")
 ////    @JsonIgnore
-//    private Vehicule vehicule;
-//
-//
-//    public Vehicule getVehicule() {
-//        return vehicule;
+//    private Vehicle vehicle;
+
+
+//    public Vehicle getVehicule() {
+//        return vehicle;
 //    }
 //
-//    public void setVehicule(Vehicule vehicule) {
-//        this.vehicule = vehicule;
+//    public void setVehicule(Vehicle vehicle) {
+//        this.vehicle = vehicle;
 //    }
 
     public Insurance() {
