@@ -1,9 +1,10 @@
 package com.grados.firstfullproject.DTO;
 
+import com.grados.firstfullproject.entities.Insurance;
 import lombok.Data;
 
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class VehicleDTO {
@@ -12,5 +13,6 @@ public class VehicleDTO {
     private LocalDate model;
     private int horsePower;
     private LocalDate dateOfPurchase;
+    private List<Insurance> insurances;
 
 }
