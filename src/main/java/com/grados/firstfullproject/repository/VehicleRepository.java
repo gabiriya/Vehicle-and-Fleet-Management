@@ -21,12 +21,12 @@ public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
 //    @Query("delete from Vehicle v where v.d.id = :id")
 //    void deleteAllVehiculeWithConduct(@Param("id") Long id);
 
-    @Query("select v from Vehicle v, Driver d where d.id = :idDriver ")
+    @Query("select v from Vehicle v, Driver d where d.id = :idDriver")
     List<Vehicle> findAllVehicles(@Param("idDriver") Long idDriver);
 
-    @Query(value = "select v.* from vehicle v where v.id = :idVehicle and v.id_driver_fk = :idDriver",
+    @Query(value = "select v.* from vehicle v where id = :idVec and id_driver_fk = :idDriver",
     nativeQuery = true)
-    Optional<Vehicle> findVehicleById(@Param("idDriver") Long idDriver);
+    Optional<Vehicle> findVehicleById(@Param("idDriver") Long idDriver,@Param("idVec") Long idVec);
 
     @Transactional
     @Modifying

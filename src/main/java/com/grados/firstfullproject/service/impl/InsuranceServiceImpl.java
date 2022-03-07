@@ -1,12 +1,15 @@
 package com.grados.firstfullproject.service.impl;
 
+import com.grados.firstfullproject.DTO.InsuranceDTO;
 import com.grados.firstfullproject.entities.Insurance;
 import com.grados.firstfullproject.exception.InsuranceNotFound;
+import com.grados.firstfullproject.mapper.InsuranceMapper;
 import com.grados.firstfullproject.repository.InsuranceRepository;
 import com.grados.firstfullproject.repository.VehicleRepository;
 import com.grados.firstfullproject.service.InsuranceService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -33,6 +36,9 @@ public class InsuranceServiceImpl implements InsuranceService {
         return mapper.insuranceToDTO(insuranceRepository.save(insurance));
     }
 
+//    private boolean hasInsurance(Long idVec){
+//        vehicleRepository.findVehicleById(idVec);
+//    }
     @Override
     public List<InsuranceDTO> findAllInsurances(Long idVec) {
         var insurances = insuranceRepository.findAllByVehicle(idVec);
@@ -53,7 +59,7 @@ public class InsuranceServiceImpl implements InsuranceService {
 //        Vehicle vehicule = vehiculeRepository.findById(idv).orElseThrow(
 //                ()-> new NotFound("Vehicule","ID",idv)
 //        );
-        Insurance updatedAssurance =  assuranceRepository.findById(id).orElseThrow(
+        Insurance updatedAssurance =  insuranceRepository.findById(id).orElseThrow(
                 ()-> new InsuranceNotFound("ID",id)
         );
 
@@ -73,9 +79,9 @@ public class InsuranceServiceImpl implements InsuranceService {
 
     @Override
     public void deleteInsurance(Long id) {
-        assuranceRepository.findById(id).orElseThrow(
+        insuranceRepository.findById(id).orElseThrow(
                 ()-> new InsuranceNotFound("ID",id)
         );
-        assuranceRepository.deleteById(id);
+        insuranceRepository.deleteById(id);
     }
 }

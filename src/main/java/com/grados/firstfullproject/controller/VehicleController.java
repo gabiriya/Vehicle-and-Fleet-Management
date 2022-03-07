@@ -2,8 +2,6 @@ package com.grados.firstfullproject.controller;
 
 
 import com.grados.firstfullproject.DTO.VehicleDTO;
-import com.grados.firstfullproject.entities.Vehicle;
-import com.grados.firstfullproject.mapper.VehicleMapper;
 import com.grados.firstfullproject.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(("/vehicle"))
+@RequestMapping(("/vehicles"))
 public class VehicleController {
 
     private final VehicleService vehiculeService;
@@ -26,14 +24,14 @@ public class VehicleController {
     }
 
     @PostMapping("/{idDriver}")
-    public ResponseEntity<Vehicle> saveVehicle(
-            @RequestBody Vehicle vehicle,
+    public ResponseEntity<VehicleDTO> saveVehicle(
+            @RequestBody VehicleDTO vehicleDTO,
             @PathVariable Long idDriver) {
-        return new ResponseEntity<>(vehiculeService.saveVehicle(vehicle,idDriver), HttpStatus.CREATED);
+        return new ResponseEntity<>(vehiculeService.saveVehicle(idDriver,vehicleDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{idDriver}/{idVehicle}")
-    public ResponseEntity<String > deleteVehicle(
+    public ResponseEntity<String> deleteVehicle(
             @PathVariable("idDriver") Long idDriver,
             @PathVariable("idVehicle") Long idVehicle){
         vehiculeService.deleteVehicle(idDriver,idVehicle);
@@ -41,14 +39,14 @@ public class VehicleController {
     }
 
     @GetMapping("{idDriver}")
-    public List<Vehicle> getAllVehicles(@PathVariable Long idDriver){
+    public List<VehicleDTO> getAllVehicles(@PathVariable Long idDriver){
         return vehiculeService.findAllVehicles(idDriver);
     }
 
     // get by id
 
     @GetMapping("{idDriver}/{idVehicle}")
-    public ResponseEntity<Vehicle> getVehicleById(
+    public ResponseEntity<VehicleDTO> getVehicleById(
             @PathVariable("idDriver") Long idDriver,
             @PathVariable("idVehicle") Long idVehicle
             ){
@@ -57,12 +55,12 @@ public class VehicleController {
 
     // update
     @PutMapping("/{idDriver}/{idVehicle}")
-    public ResponseEntity<Vehicle> updateVehicle(
+    public ResponseEntity<VehicleDTO> updateVehicle(
             @PathVariable("idVehicle") Long idVehicle,
             @PathVariable("idDriver") Long idDriver,
-            @RequestBody Vehicle vehicle)
+            @RequestBody VehicleDTO vehicleDto)
     {
-        return new ResponseEntity<>(vehiculeService.updateVehicle(idDriver,vehicle,idVehicle),HttpStatus.OK);
+        return new ResponseEntity<>(vehiculeService.updateVehicle(idDriver,vehicleDto,idVehicle),HttpStatus.OK);
     }
 
     // get vehicule(dto)

@@ -1,7 +1,9 @@
 package com.grados.firstfullproject.service.impl;
 
+import com.grados.firstfullproject.DTO.VehicleDTO;
 import com.grados.firstfullproject.entities.Vehicle;
 import com.grados.firstfullproject.exception.NotFound;
+import com.grados.firstfullproject.mapper.VehicleMapper;
 import com.grados.firstfullproject.repository.DriverRepository;
 import com.grados.firstfullproject.repository.VehicleRepository;
 import com.grados.firstfullproject.service.VehicleService;
@@ -14,43 +16,47 @@ import java.util.List;
 public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
-
+    private final VehicleMapper mapper;
     private final DriverRepository driverRepository;
 
     public VehicleServiceImpl(
             VehicleRepository vehicleRepository,
-            DriverRepository driverRepository) {
+            VehicleMapper mapper, DriverRepository driverRepository) {
         this.vehicleRepository = vehicleRepository;
+        this.mapper = mapper;
         this.driverRepository = driverRepository;
     }
 
     @Override
-    public Vehicle saveVehicle(Vehicle v,Long idDriver) {
+    public VehicleDTO saveVehicle(Long idDriver,VehicleDTO vehicleDTO) {
 
         var driver = driverRepository.findById(idDriver).orElseThrow(
                 ()-> new NotFound("Driver","id",idDriver)
         );
-        driver.getVehicles().add(v);
-        return vehicleRepository.save(v);
+        var vec =mapper.dtoToVehicle(vehicleDTO);
+        driver.getVehicles().add(vec);
+        return mapper.vehicleToDto(vehicleRepository.save(vec));
     }
 
     @Override
-    public List<Vehicle> findAllVehicles(Long idDriver) {
-        return vehicleRepository.findAllVehicles(idDriver);
+    public List<VehicleDTO> findAllVehicles(Long idDriver) {
+
+        return mapper.vehiclesToDTOs(vehicleRepository.findAllVehicles(idDriver));
     }
 
     @Override
-    public Vehicle getVehiculeById(Long idDriver, Long idVehicle) {
+    public VehicleDTO getVehiculeById(Long idDriver, Long idVehicle) {
         driverRepository.findById(idDriver).orElseThrow(
                 ()-> new NotFound("Driver","ID",idDriver)
         );
-        return vehicleRepository.findVehicleById(idVehicle).orElseThrow(
+        var vec = vehicleRepository.findVehicleById(idDriver,idVehicle).orElseThrow(
                 ()-> new NotFound("Vehicule","Id",idVehicle)
         );
+        return mapper.vehicleToDto(vec);
     }
 
     @Override
-    public Vehicle updateVehicle(Long idDriver,Vehicle v ,Long idVehicle ) {
+    public VehicleDTO updateVehicle(Long idDriver,VehicleDTO v ,Long idVehicle ) {
 
         Vehicle updatedVehicle = vehicleRepository.findById(idVehicle).orElseThrow(
                 ()-> new NotFound("Vehicule","Id",idVehicle)
@@ -72,7 +78,7 @@ public class VehicleServiceImpl implements VehicleService {
 
         vehicleRepository.save(updatedVehicle);
 
-        return updatedVehicle;
+        return mapper.vehicleToDto(updatedVehicle);
 
     }
 
