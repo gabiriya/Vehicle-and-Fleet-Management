@@ -11,26 +11,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(("/vehicles"))
+@RequestMapping(("/drivers/{idDriver}"))
 public class VehicleController {
 
     private final VehicleService vehiculeService;
 
     @Autowired
-    public VehicleController(
-            VehicleService vehiculeService
-    ) {
+    public VehicleController(VehicleService vehiculeService) {
         this.vehiculeService = vehiculeService;
     }
 
-    @PostMapping("/{idDriver}")
+    @PostMapping("/vehicles")
     public ResponseEntity<VehicleDTO> saveVehicle(
             @RequestBody VehicleDTO vehicleDTO,
             @PathVariable Long idDriver) {
         return new ResponseEntity<>(vehiculeService.saveVehicle(idDriver,vehicleDTO), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{idDriver}/{idVehicle}")
+    @DeleteMapping("/vehicles/{idVehicle}")
     public ResponseEntity<String> deleteVehicle(
             @PathVariable("idDriver") Long idDriver,
             @PathVariable("idVehicle") Long idVehicle){
@@ -38,14 +36,14 @@ public class VehicleController {
         return new ResponseEntity<>("Vehicule deleted",HttpStatus.OK);
     }
 
-    @GetMapping("{idDriver}")
+    @GetMapping("/vehicles")
     public List<VehicleDTO> getAllVehicles(@PathVariable Long idDriver){
         return vehiculeService.findAllVehicles(idDriver);
     }
 
     // get by id
 
-    @GetMapping("{idDriver}/{idVehicle}")
+    @GetMapping("/vehicles/{idVehicle}")
     public ResponseEntity<VehicleDTO> getVehicleById(
             @PathVariable("idDriver") Long idDriver,
             @PathVariable("idVehicle") Long idVehicle
@@ -54,7 +52,7 @@ public class VehicleController {
     }
 
     // update
-    @PutMapping("/{idDriver}/{idVehicle}")
+    @PutMapping("/vehicles/{idVehicle}")
     public ResponseEntity<VehicleDTO> updateVehicle(
             @PathVariable("idVehicle") Long idVehicle,
             @PathVariable("idDriver") Long idDriver,

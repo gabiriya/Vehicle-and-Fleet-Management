@@ -38,10 +38,10 @@ public class Vehicle {
     // Mapping Vehicule with Assurance
 
     @OneToMany(
-            cascade = CascadeType.MERGE
+            cascade = CascadeType.ALL
 //            ,fetch = FetchType.LAZY
     )
-    @JsonIgnore
+    @JoinColumn(name = "id_vehicle_fk")
     private List<Insurance> insurances;
 
 

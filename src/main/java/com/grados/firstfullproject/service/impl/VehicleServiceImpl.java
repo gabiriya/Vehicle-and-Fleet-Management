@@ -94,4 +94,9 @@ public class VehicleServiceImpl implements VehicleService {
         vehicleRepository.deleteVehicleById(idDriver,idVehicle);
     }
 
+    @Override
+    public List<VehicleDTO> findAllVecs() {
+        return mapper.vehiclesToDTOs(vehicleRepository.findAllBeta());
+    }
+
 }

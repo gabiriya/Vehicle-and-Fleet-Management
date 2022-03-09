@@ -33,4 +33,8 @@ public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
     @Query(value = "DELETE FROM vehicle where id = :idVehicle and id_driver_fk = :idDriver",
             nativeQuery = true)
     void deleteVehicleById( @Param("idDriver") Long idDriver,@Param("idVehicle") Long idVehicle);
+
+    @Query(value = "select v.id, v.brand, v.date_of_purchase, v.horse_power, v.model, v.id_driver_fk, i.id from vehicle v , insurance i where v.id = i.id_vehicle_fk",
+    nativeQuery = true)
+    List<Vehicle> findAllBeta();
 }

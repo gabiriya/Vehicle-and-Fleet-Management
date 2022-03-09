@@ -14,7 +14,7 @@ public interface VehicleMapper {
 
 //    @Mapping(target = "dateExpAssurance", source = "assurance.dateExpiration")
 //    @Mapping(target = "marque", source = "marque")
-//    @Mapping(target = "assurance" , source = "assurance.nom")
+//    @Mapping(target = "insurances" , source = "insurances")
 
     VehicleDTO vehicleToDto(Vehicle vehicule);
     Vehicle dtoToVehicle(VehicleDTO vehicleDTO);

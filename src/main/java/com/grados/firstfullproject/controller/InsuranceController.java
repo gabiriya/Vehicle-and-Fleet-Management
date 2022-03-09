@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/insurance")
+@RequestMapping("/drivers/{idDriver}/vehicles/{idVec}/insurances")
 public class InsuranceController {
 
     private final InsuranceService assuranceService;
@@ -20,22 +20,26 @@ public class InsuranceController {
     }
 
     // add assurance to db
-    @PostMapping("/{idVec}")
-    public ResponseEntity<InsuranceDTO> addInsurance(@RequestBody InsuranceDTO insurance,
-                                                     @PathVariable("idVec") Long idVec){
-        return  new ResponseEntity<>(assuranceService.saveInsurance(idVec,insurance), HttpStatus.CREATED);
+    @PostMapping("")
+    public ResponseEntity<InsuranceDTO> addInsurance(@PathVariable("idDriver") Long idDriver,
+                                                     @PathVariable("idVec") Long idVec,
+                                                     @RequestBody InsuranceDTO insurance){
+        return  new ResponseEntity<>(assuranceService.saveInsurance(idDriver,idVec,insurance), HttpStatus.CREATED);
     }
 
     // get all
-    @GetMapping("/{idVec}")
-    public List<InsuranceDTO> getAllInsurances(@PathVariable("idVec") Long idVec){
-        return assuranceService.findAllInsurances(idVec);
+    @GetMapping("")
+    public List<InsuranceDTO> getAllInsurances(@PathVariable("idDriver") Long idDriver,
+            @PathVariable("idVec") Long idVec){
+        return assuranceService.findAllInsurances(idDriver,idVec);
     }
 
     // get assurance by id
-    @GetMapping("{id}")
-    public ResponseEntity<InsuranceDTO> getInsuranceById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(assuranceService.getInsuranceById(id),HttpStatus.OK);
+    @GetMapping("{idIns}")
+    public ResponseEntity<InsuranceDTO> getInsuranceById(@PathVariable("idDriver") Long idDriver,
+                                                         @PathVariable("idVec") Long idVec,
+                                                         @PathVariable("idIns") Long idIns){
+        return new ResponseEntity<>(assuranceService.getInsuranceById(idDriver, idVec, idIns),HttpStatus.OK);
     }
 
     // update assurance
@@ -47,9 +51,11 @@ public class InsuranceController {
     }
 
     // delete assurance
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteInsurance(@PathVariable("id") Long id){
-        assuranceService.deleteInsurance(id);
+    @DeleteMapping("{idIns}")
+    public ResponseEntity<String> deleteInsurance(@PathVariable("idDriver") Long idDriver,
+                                                  @PathVariable("idVec") Long idVec,
+                                                  @PathVariable("idIns") Long idIns){
+        assuranceService.deleteInsurance(idDriver, idVec, idIns);
         return new ResponseEntity<>("Assurance deleted",HttpStatus.OK);
     }
 }

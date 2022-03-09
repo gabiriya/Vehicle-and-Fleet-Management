@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface InsuranceService {
 
-    InsuranceDTO saveInsurance(Long idVec,InsuranceDTO insurance);
-    List<InsuranceDTO> findAllInsurances(Long idVec);
-    InsuranceDTO getInsuranceById(Long id);
+    InsuranceDTO saveInsurance(Long idDriver, Long idVec,InsuranceDTO insurance);
+    List<InsuranceDTO> findAllInsurances(Long idDriver,Long idVec);
+    InsuranceDTO getInsuranceById(Long idDriver,Long idVec, Long idIns);
     InsuranceDTO updateInsurance(InsuranceDTO assurance,Long id);
-    void deleteInsurance(Long id);
+    void deleteInsurance(Long idDriver,Long idVec, Long idIns);
 }

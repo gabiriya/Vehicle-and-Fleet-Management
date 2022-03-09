@@ -15,4 +15,6 @@ public interface VehicleService {
     void deleteVehicle(Long idDriver,Long idVehicle);
 //    List<CarDriversDTO> getAllCarDriver();
 //    CarDriversDTO carDriverEntityToDTO(Vehicule vehicule);
+
+    List<VehicleDTO> findAllVecs();
 }
