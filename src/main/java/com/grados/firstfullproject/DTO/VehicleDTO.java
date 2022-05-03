@@ -12,6 +12,7 @@ public class VehicleDTO {
     private String brand;
     private LocalDate model;
     private int horsePower;
+    private int counter;
     private LocalDate dateOfPurchase;
     private List<Insurance> insurances;
 

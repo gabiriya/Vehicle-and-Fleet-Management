@@ -4,15 +4,25 @@ package com.grados.firstfullproject.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column
+    @NotBlank
     private String name;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -20,61 +30,4 @@ public class Insurance {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
-
-
-//    @OneToOne(
-////            cascade = CascadeType.DETACH,
-//            mappedBy = "insurance")
-////    @JsonIgnore
-//    private Vehicle vehicle;
-
-
-//    public Vehicle getVehicule() {
-//        return vehicle;
-//    }
-//
-//    public void setVehicule(Vehicle vehicle) {
-//        this.vehicle = vehicle;
-//    }
-
-    public Insurance() {
-    }
-
-    public Insurance(String name, LocalDate dateOfInsurance, LocalDate expirationDate) {
-        this.name = name;
-        this.dateOfInsurance = dateOfInsurance;
-        this.expirationDate = expirationDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String nom) {
-        this.name = nom;
-    }
-
-    public LocalDate getDateOfInsurance() {
-        return dateOfInsurance;
-    }
-
-    public void setDateOfInsurance(LocalDate dateAssurance) {
-        this.dateOfInsurance = dateAssurance;
-    }
-
-    public LocalDate getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(LocalDate dateExpiration) {
-        this.expirationDate = dateExpiration;
-    }
 }

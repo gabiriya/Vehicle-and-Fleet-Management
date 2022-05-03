@@ -9,7 +9,9 @@ import com.grados.firstfullproject.repository.VehicleRepository;
 import com.grados.firstfullproject.service.VehicleService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 @Service
@@ -28,14 +30,19 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public VehicleDTO saveVehicle(Long idDriver,VehicleDTO vehicleDTO) {
+    public List<VehicleDTO> saveVehicle(Long idDriver, List<VehicleDTO> vehicleDTOs) {
 
         var driver = driverRepository.findById(idDriver).orElseThrow(
-                ()-> new NotFound("Driver","id",idDriver)
+                () -> new NotFound("Driver", "id", idDriver)
         );
-        var vec =mapper.dtoToVehicle(vehicleDTO);
-        driver.getVehicles().add(vec);
-        return mapper.vehicleToDto(vehicleRepository.save(vec));
+        List<Vehicle> vecDto = new ArrayList<>();
+        vehicleDTOs.forEach(vehicleDTO -> {
+            var vec = mapper.dtoToVehicle(vehicleDTO);
+            driver.getVehicles().add(vec);
+            vecDto.add(vehicleRepository.save(vec));
+        });
+
+        return mapper.vehiclesToDTOs(vecDto);
     }
 
     @Override
@@ -47,33 +54,33 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleDTO getVehiculeById(Long idDriver, Long idVehicle) {
         driverRepository.findById(idDriver).orElseThrow(
-                ()-> new NotFound("Driver","ID",idDriver)
+                () -> new NotFound("Driver", "ID", idDriver)
         );
-        var vec = vehicleRepository.findVehicleById(idDriver,idVehicle).orElseThrow(
-                ()-> new NotFound("Vehicule","Id",idVehicle)
+        var vec = vehicleRepository.findVehicleById(idDriver, idVehicle).orElseThrow(
+                () -> new NotFound("Vehicule", "Id", idVehicle)
         );
         return mapper.vehicleToDto(vec);
     }
 
     @Override
-    public VehicleDTO updateVehicle(Long idDriver,VehicleDTO v ,Long idVehicle ) {
+    public VehicleDTO updateVehicle(Long idDriver, VehicleDTO v, Long idVehicle) {
 
         Vehicle updatedVehicle = vehicleRepository.findById(idVehicle).orElseThrow(
-                ()-> new NotFound("Vehicule","Id",idVehicle)
+                () -> new NotFound("Vehicule", "Id", idVehicle)
         );
 
         driverRepository.findById(idDriver).orElseThrow(
-                () -> new NotFound("Driver","ID",idDriver)
+                () -> new NotFound("Driver", "ID", idDriver)
         );
 
         // check empties
-        if (v.getDateOfPurchase()!=null)
-          updatedVehicle.setDateOfPurchase(v.getDateOfPurchase());
-        if (v.getBrand()!=null)
-          updatedVehicle.setBrand(v.getBrand());
-        if (v.getHorsePower()!=0)
-         updatedVehicle.setHorsePower(v.getHorsePower());
-        if (v.getModel()!=null)
+        if (v.getDateOfPurchase() != null)
+            updatedVehicle.setDateOfPurchase(v.getDateOfPurchase());
+        if (v.getBrand() != null)
+            updatedVehicle.setBrand(v.getBrand());
+        if (v.getHorsePower() != 0)
+            updatedVehicle.setHorsePower(v.getHorsePower());
+        if (v.getModel() != null)
             updatedVehicle.setModel(v.getModel());
 
         vehicleRepository.save(updatedVehicle);
@@ -83,15 +90,15 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public void deleteVehicle(Long idDriver,Long idVehicle) {
+    public void deleteVehicle(Long idDriver, Long idVehicle) {
 
         driverRepository.findById(idDriver).orElseThrow(
-                () -> new NotFound("Driver","ID",idDriver)
+                () -> new NotFound("Driver", "ID", idDriver)
         );
 
         vehicleRepository.findById(idVehicle).orElseThrow(
-                ()->new NotFound("Vehicule","ID",idVehicle));
-        vehicleRepository.deleteVehicleById(idDriver,idVehicle);
+                () -> new NotFound("Vehicule", "ID", idVehicle));
+        vehicleRepository.deleteVehicleById(idDriver, idVehicle);
     }
 
     @Override

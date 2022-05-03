@@ -42,7 +42,7 @@ public class InsuranceServiceImpl implements InsuranceService {
         List<InsuranceDTO> allInsurances = findAllInsurances(idDriver,idVec);
         allInsurances.forEach(ins -> {
             if (ins.getExpirationDate().compareTo(LocalDate.now()) > 0)
-                throw new NotExpired(ins.getId(),ins.getExpirationDate());
+                throw new NotExpired(ins.getExpirationDate(),ins.getId());
             insuranceRepository.deleteById(ins.getId());
         });
 
@@ -77,13 +77,12 @@ public class InsuranceServiceImpl implements InsuranceService {
     }
 
     @Override
-    public InsuranceDTO updateInsurance(InsuranceDTO insurance, Long id) {
-//        Long idv = assurance.getVehicule().getId();
-//        Vehicle vehicule = vehiculeRepository.findById(idv).orElseThrow(
-//                ()-> new NotFound("Vehicule","ID",idv)
-//        );
-        Insurance updatedAssurance =  insuranceRepository.findById(id).orElseThrow(
-                ()-> new InsuranceNotFound("ID",id)
+    public InsuranceDTO updateInsurance(Long idDriver,Long idVec , Long idIns , InsuranceDTO insurance) {
+        findDriverOrThrow(idDriver);
+        findVehicleOrThrow(idDriver, idVec);
+
+        Insurance updatedAssurance =  insuranceRepository.findById(idIns).orElseThrow(
+                ()-> new InsuranceNotFound("ID",idIns)
         );
 
 //        updatedAssurance.setVehicule(vehicule);
@@ -93,7 +92,9 @@ public class InsuranceServiceImpl implements InsuranceService {
         if(insurance.getDateOfInsurance() != null)
             updatedAssurance.setDateOfInsurance(insurance.getDateOfInsurance());
         if(insurance.getExpirationDate() != null)
-            updatedAssurance.setExpirationDate(insurance.getExpirationDate());
+            if (updatedAssurance.getExpirationDate().compareTo(LocalDate.now()) > 0)
+                updatedAssurance.setExpirationDate(insurance.getExpirationDate());
+            else throw new NotExpired(updatedAssurance.getExpirationDate(),idIns);
 
         insuranceRepository.save(updatedAssurance);
 

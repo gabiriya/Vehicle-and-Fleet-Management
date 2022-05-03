@@ -26,11 +26,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public DriverDTO saveDriver(DriverDTO c) {
-        var conducteur = driverMapper.DtoToDriver(c);
-        var conducteur2 = driverRepository.save(conducteur);
+    public DriverDTO saveDriver(DriverDTO d) {
+        var driver = driverMapper.DtoToDriver(d);
+        var driver2 = driverRepository.save(driver);
 
-        return driverMapper.DriverToDTO(conducteur2);
+        return driverMapper.DriverToDTO(driver2);
     }
 
     @Override

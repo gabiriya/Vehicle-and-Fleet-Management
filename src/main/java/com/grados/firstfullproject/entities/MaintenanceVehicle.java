@@ -1,75 +1,57 @@
 package com.grados.firstfullproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MaintenanceVehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idMaintenanceVehicle;
 
+    @Column
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateMaintenanceVehicle;
 
+    @Column
+    @PositiveOrZero
     private int kmVehicle;
 
-    // entretien Vehicule with vehicule
+
+//    // entretien Vehicule with vehicule
 //    @ManyToOne(fetch = FetchType.LAZY)
 ////    @JsonIgnore
-//    private Vehicle vehicule;
+//    private Vehicle vehicle;
 //
-//    public Vehicle getVehicule() {
-//        return vehicule;
+//    public Vehicle getVehicle() {
+//        return vehicle;
 //    }
 //
-//    public void setVehicule(Vehicle vehicule) {
-//        this.vehicule = vehicule;
+//    public void setVehicle(Vehicle vehicle) {
+//        this.vehicle = vehicle;
 //    }
-
-
-    // entretien with entretienVehicule
+//
+//
+////     entretien with entretienVehicule
 //    @ManyToOne()
 //    @JoinColumn(name = "id_maintenance")
 //    private Maintenance maintenance;
 //
-//    public Maintenance getEntretien() {
+//    public Maintenance getMaintenance() {
 //        return maintenance;
 //    }
 //
-//    public void setEntretien(Maintenance entretien) {
-//        this.maintenance = entretien;
+//    public void setMaintenance(Maintenance maintenance) {
+//        this.maintenance = maintenance;
 //    }
-
-    public MaintenanceVehicle() {
-    }
-
-    public MaintenanceVehicle(LocalDate dateMaintenanceVehicle, int kmVehicle) {
-        this.dateMaintenanceVehicle = dateMaintenanceVehicle;
-        this.kmVehicle = kmVehicle;
-    }
-
-    public Long getIdMaintenanceVehicle() {
-        return idMaintenanceVehicle;
-    }
-
-    public LocalDate getDateMaintenanceVehicle() {
-        return dateMaintenanceVehicle;
-    }
-
-    public int getKmVehicle() {
-        return kmVehicle;
-    }
-
-    public void setIdMaintenanceVehicle(Long idEntrVehic) {
-        this.idMaintenanceVehicle = idEntrVehic;
-    }
-
-    public void setDateMaintenanceVehicle(LocalDate dateEntretien) {
-        this.dateMaintenanceVehicle = dateEntretien;
-    }
-
-    public void setKmVehicle(int kmVehicule) {
-        this.kmVehicle = kmVehicule;
-    }
 }

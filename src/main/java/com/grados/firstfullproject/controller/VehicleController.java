@@ -22,8 +22,8 @@ public class VehicleController {
     }
 
     @PostMapping("/vehicles")
-    public ResponseEntity<VehicleDTO> saveVehicle(
-            @RequestBody VehicleDTO vehicleDTO,
+    public ResponseEntity<List<VehicleDTO>> saveVehicle(
+            @RequestBody List<VehicleDTO> vehicleDTO,
             @PathVariable Long idDriver) {
         return new ResponseEntity<>(vehiculeService.saveVehicle(idDriver,vehicleDTO), HttpStatus.CREATED);
     }

@@ -43,11 +43,12 @@ public class InsuranceController {
     }
 
     // update assurance
-    @PutMapping("{id}")
-    public ResponseEntity<InsuranceDTO> updateInsurance(
-            @PathVariable("id") Long id,
-            @RequestBody InsuranceDTO assurance){
-        return new ResponseEntity<>(assuranceService.updateInsurance(assurance,id),HttpStatus.OK);
+    @PutMapping("{idIns}")
+    public ResponseEntity<InsuranceDTO> updateInsurance(@PathVariable Long idDriver,
+                                                        @PathVariable Long idVec,
+                                                        @PathVariable("idIns") Long idIns,
+                                                        @RequestBody InsuranceDTO insurance){
+        return new ResponseEntity<>(assuranceService.updateInsurance(idDriver,idVec,idIns,insurance),HttpStatus.OK);
     }
 
     // delete assurance

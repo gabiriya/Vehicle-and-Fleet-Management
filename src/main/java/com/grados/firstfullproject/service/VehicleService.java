@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface VehicleService {
 
-    VehicleDTO saveVehicle(Long idDriver,VehicleDTO vehicleDTO );
+    List<VehicleDTO> saveVehicle(Long idDriver,List<VehicleDTO> vehicleDTO );
     List<VehicleDTO> findAllVehicles(Long idDriver);
     VehicleDTO getVehiculeById(Long idDriver, Long idVehicle);
     VehicleDTO updateVehicle( Long idDriver,VehicleDTO vDto,Long idVehicle);
