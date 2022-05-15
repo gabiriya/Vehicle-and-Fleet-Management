@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/drivers/{idDriver}/vehicles/{idVec}/insurances")
 public class InsuranceController {
-
+    // todo - api for expired insurances
     private final InsuranceService assuranceService;
 
     public InsuranceController(InsuranceService assuranceService) {

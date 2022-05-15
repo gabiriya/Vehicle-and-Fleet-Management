@@ -25,8 +25,12 @@ public class Maintenance {
     private String name;
 
     private int frequency;
+
+    @Enumerated(EnumType.STRING)
     private PeriodType period;
+
     private int mileage;
+
     @Column
     @NotNull
     private double amount;
