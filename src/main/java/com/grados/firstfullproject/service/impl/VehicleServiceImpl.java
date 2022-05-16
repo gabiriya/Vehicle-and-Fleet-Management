@@ -98,6 +98,10 @@ public class VehicleServiceImpl implements VehicleService {
 
         vehicleRepository.findById(idVehicle).orElseThrow(
                 () -> new NotFound("Vehicule", "ID", idVehicle));
+
+        driverRepository.deleteById(idDriver);
+
+
         vehicleRepository.deleteVehicleById(idDriver, idVehicle);
     }
 

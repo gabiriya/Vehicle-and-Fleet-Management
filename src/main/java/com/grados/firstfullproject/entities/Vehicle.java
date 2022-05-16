@@ -65,6 +65,14 @@ public class Vehicle {
         this.dateOfPurchase = dateOfPurchase;
     }
 
+    public Vehicle( String brand, LocalDate model, int horsePower, int counter, LocalDate dateOfPurchase) {
+        this.brand = brand;
+        this.model = model;
+        this.horsePower = horsePower;
+        this.counter = counter;
+        this.dateOfPurchase = dateOfPurchase;
+    }
+
     public Long getId() {
         return id;
     }

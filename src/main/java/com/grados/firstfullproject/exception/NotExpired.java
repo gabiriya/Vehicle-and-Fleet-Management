@@ -1,7 +1,11 @@
 package com.grados.firstfullproject.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.time.LocalDate;
 
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class NotExpired extends RuntimeException{
     private final LocalDate expiredDate;
 //    private final String fieldName;

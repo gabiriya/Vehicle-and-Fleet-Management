@@ -14,31 +14,31 @@ import java.util.List;
 @RequestMapping(("/drivers/{idDriver}"))
 public class VehicleController {
 
-    private final VehicleService vehiculeService;
+    private final VehicleService vehicleService;
 
     @Autowired
-    public VehicleController(VehicleService vehiculeService) {
-        this.vehiculeService = vehiculeService;
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
     }
 
     @PostMapping("/vehicles")
     public ResponseEntity<List<VehicleDTO>> saveVehicle(
             @RequestBody List<VehicleDTO> vehicleDTO,
             @PathVariable Long idDriver) {
-        return new ResponseEntity<>(vehiculeService.saveVehicle(idDriver,vehicleDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(vehicleService.saveVehicle(idDriver,vehicleDTO), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/vehicles/{idVehicle}")
     public ResponseEntity<String> deleteVehicle(
             @PathVariable("idDriver") Long idDriver,
             @PathVariable("idVehicle") Long idVehicle){
-        vehiculeService.deleteVehicle(idDriver,idVehicle);
+        vehicleService.deleteVehicle(idDriver,idVehicle);
         return new ResponseEntity<>("Vehicule deleted",HttpStatus.OK);
     }
 
     @GetMapping("/vehicles")
     public List<VehicleDTO> getAllVehicles(@PathVariable Long idDriver){
-        return vehiculeService.findAllVehicles(idDriver);
+        return vehicleService.findAllVehicles(idDriver);
     }
 
     // get by id
@@ -48,7 +48,7 @@ public class VehicleController {
             @PathVariable("idDriver") Long idDriver,
             @PathVariable("idVehicle") Long idVehicle
             ){
-        return new ResponseEntity<>(vehiculeService.getVehiculeById(idDriver,idVehicle),HttpStatus.OK);
+        return new ResponseEntity<>(vehicleService.getVehiculeById(idDriver,idVehicle),HttpStatus.OK);
     }
 
     // update
@@ -58,20 +58,20 @@ public class VehicleController {
             @PathVariable("idDriver") Long idDriver,
             @RequestBody VehicleDTO vehicleDto)
     {
-        return new ResponseEntity<>(vehiculeService.updateVehicle(idDriver,vehicleDto,idVehicle),HttpStatus.OK);
+        return new ResponseEntity<>(vehicleService.updateVehicle(idDriver,vehicleDto,idVehicle),HttpStatus.OK);
     }
 
     // get vehicule(dto)
 //    @GetMapping("/cars")
 //    public List<CarDriversDTO> getCarDriversDTOS(){
-//        return vehiculeService.getAllCarDriver();
+//        return vehicleService.getAllCarDriver();
 //    }
 
    // get vehicule with conducteur and assurance and date exp assurance
 //    @GetMapping("/car/{id}")
 //    public VehicleDTO getVehiculeDto(@PathVariable("id") Long id){
 //        return vehicleMapper.VehiculeToDto(
-//                vehiculeService.getVehiculeById(id)
+//                vehicleService.getVehiculeById(id)
 //        );
 //    }
 }
